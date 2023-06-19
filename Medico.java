@@ -14,13 +14,5 @@ public class Medico extends Pessoa {
         this.listaPacientes = new ArrayList<Paciente>();
     }
 
-    public void ler() {
-        System.out.println("Lendo");
-    }
-
-    public void escrever() {
-        System.out.println("Escrevendo");
-    }
-
     // Generate getters and setters
 }

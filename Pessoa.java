@@ -1,6 +1,8 @@
 import java.time.LocalDate;
 
-public abstract class Pessoa implements Arquivos {
+import ArquivosOperacao.Arquivos;
+
+public abstract class Pessoa{
     protected final String cpf;
     protected String nome;
     protected String telefone;

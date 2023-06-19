@@ -1,7 +1,3 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.time.LocalDate;
 
 public class Paciente extends Pessoa {
@@ -78,38 +74,5 @@ public class Paciente extends Pessoa {
     public void atualizarConvenio(int codigo, LocalDate dataValidade, double multiplicadorDesconto) {
         Convenio newConvenio = new Convenio(codigo, dataValidade, multiplicadorDesconto);
         setConvenio(newConvenio);
-    }
-
-    @Override
-    public void ler() {
-        System.out.println("Lendo arquivo: ");
-        File file = new File("arquivos/Paciente.csv");
-
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String linha = br.readLine();
-            while ((linha = br.readLine()) != null) {
-                // TO DO
-                // Imprimir dados no menu, ao invés do terminal
-                System.out.println(linha);
-                String[] dados = linha.split(",");
-                System.out.println("CPF: " + dados[0]);
-                System.out.println("Nome: " + dados[1]);
-                System.out.println("Telefone: " + dados[2]);
-                System.out.println("Email: " + dados[3]);
-                System.out.println("Endereco: " + dados[4]);
-                System.out.println("Data de Nascimento: " + dados[5]);
-                System.out.println("Genero: " + dados[6]);
-                System.out.println();
-            }
-        } catch (IOException e) {
-            // TO DO
-            // Tratar exceção; não pode só imprimir mensagem de erro
-            System.out.println(e.getMessage());
-        }
-    }
-
-    @Override
-    public void escrever() {
-        System.out.println("");
     }
 }
