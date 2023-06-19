@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-
 import ArquivosOperacao.MedicoArquivos;
 import ArquivosOperacao.PacienteArquivos;
 

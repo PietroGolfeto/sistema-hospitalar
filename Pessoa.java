@@ -1,7 +1,5 @@
 import java.time.LocalDate;
 
-import ArquivosOperacao.Arquivos;
-
 public abstract class Pessoa{
     protected final String cpf;
     protected String nome;
