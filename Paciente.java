@@ -44,10 +44,18 @@ public class Paciente extends Pessoa {
     public Paciente(String cpf, String nome, String telefone, String email, String endereco, LocalDate dataNascimento,
             String genero, double altura, double peso, String tipoSanguinio) {
         super(cpf, nome, telefone, email, endereco, dataNascimento, genero);
-        prontuario = new Prontuario(altura, peso, tipoSanguinio);
+        this.prontuario = new Prontuario(altura, peso, tipoSanguinio);
         // TO DO
         // O paciente não precisa ter um convenio, mas pode ter para obter desconto
-        this.convenio = null;
+        // LIXO PARA TESTAR MAIN -> REMOVER DEPOIS
+        this.convenio = new Convenio(0, LocalDate.now(), 0.1);
+    }
+
+    // Construtor sem parâmetros para manipulação de arquivos
+    public Paciente() {
+        super();
+        this.prontuario = new Prontuario(0.0, 0.0, null);
+        this.convenio = new Convenio(0, LocalDate.now(), 0.0);
     }
 
     public Prontuario getProntuario() {

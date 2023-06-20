@@ -6,9 +6,14 @@ public class Convenio {
     double multiplicadorDesconto;
 
     public Convenio(int codigo, LocalDate dataValidade, double multiplicadorDesconto) {
-        this.codigo = codigo;
+        this.codigo = codigo;        
         this.dataValidade = dataValidade;
         this.multiplicadorDesconto = multiplicadorDesconto;
+    }
+    
+    // Construtor sem parâmetros para manipulação de arquivos
+    public Convenio() {
+        this(0, LocalDate.now(), 0.0);
     }
 
     public int getCodigo() {

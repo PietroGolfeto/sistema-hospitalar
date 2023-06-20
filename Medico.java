@@ -14,5 +14,31 @@ public class Medico extends Pessoa {
         this.listaPacientes = new ArrayList<Paciente>();
     }
 
-    // Generate getters and setters
+    // Construtor sem parâmetros para manipulação de arquivos
+    public Medico() {
+        super();
+        this.CRM = null;
+        this.areaAtuacao = null;
+        this.listaPacientes = new ArrayList<Paciente>();
+    }
+
+    public String getCRM() {
+        return CRM;
+    }
+
+    public String getAreaAtuacao() {
+        return areaAtuacao;
+    }
+
+    public void setAreaAtuacao(String areaAtuacao) {
+        this.areaAtuacao = areaAtuacao;
+    }
+
+    public ArrayList<Paciente> getListaPacientes() {
+        return listaPacientes;
+    }
+
+    public void setListaPacientes(ArrayList<Paciente> listaPacientes) {
+        this.listaPacientes = listaPacientes;
+    }
 }

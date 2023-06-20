@@ -1,5 +1,5 @@
-public interface Arquivos {
-    public void ler();
+public interface Arquivos<T> {
+    public void ler(T objeto);
 
-    public void escrever();
+    public void escrever(T objeto);
 }

@@ -20,6 +20,11 @@ public abstract class Pessoa{
         this.genero = genero;
     }
 
+    // Construtor sem parâmetros para manipulação de arquivos
+    public Pessoa() {
+        this(null, null, null, null, null, LocalDate.now(), null);
+    }
+
     public String getCpf() {
         return cpf;
     }
