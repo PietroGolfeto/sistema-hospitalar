@@ -1,5 +1,6 @@
+import java.util.ArrayList;
 public interface Arquivos<T> {
-    public void ler(T objeto);
+    public ArrayList<String> ler(T objeto);
 
-    public void escrever(T objeto);
+    public T escrever(T objeto);
 }

@@ -4,14 +4,14 @@ import java.util.ArrayList;
 public class Medico extends Pessoa {
     final String CRM;
     String areaAtuacao;
-    ArrayList<Paciente> listaPacientes;
+    ArrayList<Consulta> listaConsultas;
 
     public Medico(String cpf, String nome, String telefone, String email, String endereco, LocalDate dataNascimento,
             String genero, String CRM, String areaAtuacao) {
         super(cpf, nome, telefone, email, endereco, dataNascimento, genero);
         this.CRM = CRM;
         this.areaAtuacao = areaAtuacao;
-        this.listaPacientes = new ArrayList<Paciente>();
+        this.listaConsultas = new ArrayList<Consulta>();
     }
 
     // Construtor sem parâmetros para manipulação de arquivos
@@ -19,7 +19,11 @@ public class Medico extends Pessoa {
         super();
         this.CRM = null;
         this.areaAtuacao = null;
-        this.listaPacientes = new ArrayList<Paciente>();
+        this.listaConsultas = new ArrayList<Consulta>();
+    }
+
+    public gerarDiagnostico(String doenca, String descricao, Medico medico){
+
     }
 
     public String getCRM() {
@@ -34,11 +38,7 @@ public class Medico extends Pessoa {
         this.areaAtuacao = areaAtuacao;
     }
 
-    public ArrayList<Paciente> getListaPacientes() {
-        return listaPacientes;
-    }
-
-    public void setListaPacientes(ArrayList<Paciente> listaPacientes) {
-        this.listaPacientes = listaPacientes;
+    public ArrayList<Consulta> getListaConsultas() {
+        return listaConsultas;
     }
 }

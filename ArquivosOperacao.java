@@ -3,11 +3,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.ArrayList;
 
 public class ArquivosOperacao implements Arquivos<Object> {
     @Override
-    public void ler(Object objeto) {
+    public ArrayList<String> ler(Object objeto) {
         System.out.println("Lendo arquivo: ");
+        ArrayList<String> dadosRetorno = new ArrayList<String>();
         String caminho = "arquivosCSV/" + objeto.getClass().getSimpleName() + ".csv";
         try {
             // Instancia um objeto File com o caminho do arquivo CSV
@@ -15,6 +17,7 @@ public class ArquivosOperacao implements Arquivos<Object> {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 // Ignora o cabeçalho do arquivo
                 String linha = br.readLine();
+                String linhaRetorno = "";
 
                 switch (objeto.getClass().getSimpleName()) {
                     case "Paciente":
@@ -22,19 +25,18 @@ public class ArquivosOperacao implements Arquivos<Object> {
                         while ((linha = br.readLine()) != null) {
                             // TO DO
                             // Imprimir dados no menu, ao invés do terminal
-                            System.out.println(linha);
                             String[] dados = linha.split(",");
-                            System.out.println("CPF: " + dados[0]);
-                            System.out.println("Nome: " + dados[1]);
-                            System.out.println("Telefone: " + dados[2]);
-                            System.out.println("Email: " + dados[3]);
-                            System.out.println("Endereco: " + dados[4]);
-                            System.out.println("Data de Nascimento: " + dados[5]);
-                            System.out.println("Genero: " + dados[6]);
-                            System.out.println("Altura: " + dados[7]);
-                            System.out.println("Peso: " + dados[8]);
-                            System.out.println("Tipo Sanguinio: " + dados[9]);
-                            System.out.println();
+                            linhaRetorno += " CPF: " + dados[0];
+                            linhaRetorno += " Nome: " + dados[1];
+                            linhaRetorno += " Telefone: " + dados[2];
+                            linhaRetorno += " Email: " + dados[3];
+                            linhaRetorno += " Endereco: " + dados[4];
+                            linhaRetorno += " Data de Nascimento: " + dados[5];
+                            linhaRetorno += " Genero: " + dados[6];
+                            linhaRetorno += " Altura: " + dados[7];
+                            linhaRetorno += " Peso: " + dados[8];
+                            linhaRetorno += " Tipo Sanguinio: " + dados[9] + "\n";
+                            dadosRetorno.add(linhaRetorno);
                         }
                         break;
 
@@ -43,39 +45,45 @@ public class ArquivosOperacao implements Arquivos<Object> {
                         while ((linha = br.readLine()) != null) {
                             // TO DO
                             // Imprimir dados no menu, ao invés do terminal
-                            System.out.println(linha);
                             String[] dados = linha.split(",");
-                            System.out.println("CPF: " + dados[0]);
-                            System.out.println("Nome: " + dados[1]);
-                            System.out.println("Telefone: " + dados[2]);
-                            System.out.println("Email: " + dados[3]);
-                            System.out.println("Endereco: " + dados[4]);
-                            System.out.println("Data de Nascimento: " + dados[5]);
-                            System.out.println("Genero: " + dados[6]);
-                            System.out.println("CRM: " + dados[7]);
-                            System.out.println("Especialidade: " + dados[8]);
+                            linhaRetorno += " CPF: " + dados[0];
+                            linhaRetorno += " Nome: " + dados[1];
+                            linhaRetorno += " Telefone: " + dados[2];
+                            linhaRetorno += " Email: " + dados[3];
+                            linhaRetorno += " Endereco: " + dados[4];
+                            linhaRetorno += " Data de Nascimento: " + dados[5];
+                            linhaRetorno += " Genero: " + dados[6];
+                            linhaRetorno += " CRM: " + dados[7];
+                            linhaRetorno += " Especialidade: " + dados[8];
 
                             if (dados.length >= 10) {
                                 String[] pacientes = Arrays.copyOfRange(dados, 9, dados.length);
                                 int numPaciente = 0;
                                 for (String paciente : pacientes) {
-                                    System.out.println("Paciente " + numPaciente + ": " + paciente);
+                                    linhaRetorno += " Paciente " + numPaciente + ": " + paciente;
                                     numPaciente++;
                                 }
                             }
-                            System.out.println();
+                            linhaRetorno += "\n";
+                            dadosRetorno.add(linhaRetorno);
                         }
                         break;
+
                     case "Consulta":
 
                         break;
+
                     case "Exame":
 
                         break;
+
                     case "Prontuario":
 
                         break;
+
                     default:
+                    // TO DO
+                    // Tratar exceção; não pode só imprimir mensagem de erro
                         System.out.println("Objeto não encontrado");
                         break;
                 }
@@ -86,14 +94,20 @@ public class ArquivosOperacao implements Arquivos<Object> {
             }
         } catch (Exception e) {
             // TO DO
+            // Tratar exceção; não pode só imprimir mensagem de erro
             e.printStackTrace();
         }
+        return dadosRetorno;
     }
 
     @Override
-    public void escrever(Object objeto) {
+    public Object escrever(Object objeto) {
         // TO DO
         // FALTA SEPARAR DE ACORDO COM A CLASSE DA MESMA FORMA E ESCREVER NO CSV
-        System.out.println("Imprimindo objeto");
+        System.out.println("retornando objeto");
+        return objeto;
+        // TO DO
+        // FALTA IMPLEMENTAR ESCRITA
+        
     }
 }

@@ -3,9 +3,9 @@ import java.time.LocalDate;
 public class Paciente extends Pessoa {
     // Classe aninhada para representar o prontuário do paciente
     class Prontuario {
-        public double altura;
-        double peso;
-        String tipoSanguinio;
+        private double altura;
+        private double peso;
+        private final String tipoSanguinio;
 
         public Prontuario(double altura, double peso, String tipoSanguinio) {
             this.altura = altura;
@@ -32,14 +32,10 @@ public class Paciente extends Pessoa {
         public void setPeso(double peso) {
             this.peso = peso;
         }
-
-        public void setTipoSanguinio(String tipoSanguinio) {
-            this.tipoSanguinio = tipoSanguinio;
-        }
     }
 
-    Prontuario prontuario;
-    Convenio convenio;
+    private Prontuario prontuario;
+    private Convenio convenio;
 
     public Paciente(String cpf, String nome, String telefone, String email, String endereco, LocalDate dataNascimento,
             String genero, double altura, double peso, String tipoSanguinio) {
