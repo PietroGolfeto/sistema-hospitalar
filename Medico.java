@@ -22,8 +22,8 @@ public class Medico extends Pessoa {
         this.listaConsultas = new ArrayList<Consulta>();
     }
 
-    public gerarDiagnostico(String doenca, String descricao, Medico medico){
-
+    public Diagnostico gerarDiagnostico(String doenca, String descricao, Medico medico) {
+        return null;
     }
 
     public String getCRM() {

@@ -1,4 +1,4 @@
-public class Consulta{
+public class Consulta {
     Paciente paciente;
     Diagnostico diagnostico;
     Medico medico;
