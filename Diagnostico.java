@@ -3,6 +3,7 @@ public class Diagnostico {
     String descricao;
     Medico medico;
     Procedimento procedimento;
+    final int id;
 
     // Todo diagnostico tera um procedimento prescrito para o paciente
     public Diagnostico(String doenca, String descricao, Procedimento procedimento) {
