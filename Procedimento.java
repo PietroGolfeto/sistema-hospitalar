@@ -8,10 +8,15 @@ public abstract class Procedimento {
 
     public Procedimento(Medico medico, LocalDate data) {
         Random random = new Random();
-        int id = random.nextInt();
+        this.id = random.nextInt(1000);
         this.medico = medico;
         this.data = data;
-        this.id = id;
+    }
+
+    public Procedimento() {
+        this.medico = new Medico();
+        this.data = LocalDate.now();
+        this.id = 0;
     }
 
     public Medico getMedico() {

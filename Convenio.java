@@ -1,19 +1,21 @@
 import java.time.LocalDate;
+import java.util.Random;
 
 public class Convenio {
     final int codigo;
     LocalDate dataValidade;
     double multiplicadorDesconto;
 
-    public Convenio(int codigo, LocalDate dataValidade, double multiplicadorDesconto) {
-        this.codigo = codigo;        
+    public Convenio(LocalDate dataValidade, double multiplicadorDesconto) {
+        Random random = new Random();
+        this.codigo = random.nextInt(1000);
         this.dataValidade = dataValidade;
         this.multiplicadorDesconto = multiplicadorDesconto;
     }
     
     // Construtor sem parâmetros para manipulação de arquivos
     public Convenio() {
-        this(0, LocalDate.now(), 0.0);
+        this(LocalDate.now(), 0.9);
     }
 
     public int getCodigo() {

@@ -44,14 +44,14 @@ public class Paciente extends Pessoa {
         // TO DO
         // O paciente não precisa ter um convenio, mas pode ter para obter desconto
         // LIXO PARA TESTAR MAIN -> REMOVER DEPOIS
-        this.convenio = new Convenio(0, LocalDate.now(), 0.1);
+        this.convenio = new Convenio(LocalDate.now(), 0.1);
     }
 
     // Construtor sem parâmetros para manipulação de arquivos
     public Paciente() {
         super();
-        this.prontuario = new Prontuario(0.0, 0.0, null);
-        this.convenio = new Convenio(0, LocalDate.now(), 0.0);
+        this.prontuario = new Prontuario(0.0, 0.0, "nada");
+        this.convenio = new Convenio(LocalDate.now(), 0.1);
     }
 
     public Prontuario getProntuario() {
@@ -75,8 +75,8 @@ public class Paciente extends Pessoa {
         setProntuario(newProntuario);
     }
 
-    public void atualizarConvenio(int codigo, LocalDate dataValidade, double multiplicadorDesconto) {
-        Convenio newConvenio = new Convenio(codigo, dataValidade, multiplicadorDesconto);
+    public void atualizarConvenio(LocalDate dataValidade, double multiplicadorDesconto) {
+        Convenio newConvenio = new Convenio(dataValidade, multiplicadorDesconto);
         setConvenio(newConvenio);
     }
 }

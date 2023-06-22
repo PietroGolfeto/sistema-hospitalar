@@ -116,10 +116,8 @@ public class MenuPrincipal extends JFrame {
     }
 
     public void setTextoMenu(ArrayList<String> textoMenu) {
-        System.out.println("Texto do antigo setTextoMenu eh: " + textoMenu + "\n");
-        this.textoMenu.clear(); // Clear the existing elements
-        this.textoMenu.addAll(textoMenu); // Add all the elements from the new list
-        System.out.println("Texto do novo setTextoMenu eh: " + this.textoMenu + "\n");
+        this.textoMenu.clear(); // Limpa a lista
+        this.textoMenu.addAll(textoMenu); // Adiciona os dados da lista passada como parâmetro
     }    
 }
 
