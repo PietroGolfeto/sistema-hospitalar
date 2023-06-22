@@ -1,11 +1,14 @@
 import java.time.LocalDate;
+import java.util.Random;
 
 public abstract class Procedimento {
     Medico medico;
     LocalDate data;
     final int id;
 
-    public Procedimento(Medico medico, LocalDate data, int id) {
+    public Procedimento(Medico medico, LocalDate data) {
+        Random random = new Random();
+        int id = random.nextInt();
         this.medico = medico;
         this.data = data;
         this.id = id;

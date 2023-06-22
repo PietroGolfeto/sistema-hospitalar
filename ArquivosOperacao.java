@@ -15,7 +15,6 @@ public class ArquivosOperacao implements Arquivos<Object> {
             // Instancia um objeto File com o caminho do arquivo CSV
             File file = new File(new File(".").getCanonicalFile(), caminho);
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-                // Ignora o cabeçalho do arquivo
                 String linha = br.readLine();
                 String linhaRetorno = "";
 

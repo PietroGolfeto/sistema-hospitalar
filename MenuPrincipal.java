@@ -14,18 +14,17 @@ public class MenuPrincipal extends JFrame {
     protected JTextArea areaTexto;
     protected ArrayList<String> textoMenu = new ArrayList<>();
 
-    // TO DO - ERRO NA IMPRESSÃO DO MENU, PRECISA CLICAR EM QUALQUER BOTÃO APÓS SELECIONAR O LISTAR PACIENTE PARA IMPRIMIR NA CAIXA DE TEXTO
     public MenuPrincipal() {
         setTitle("Sistema de gerenciamento hospitalar");
 
         JPanel painel = new JPanel();
-        areaTexto = new JTextArea(50, 50);
+        areaTexto = new JTextArea(40, 100);
         JScrollPane scroll = new JScrollPane(areaTexto);
         painel.add(scroll);
-        
+
         JButton botaoListar = new JButton("Listar");
         JButton botaoSair = new JButton("Sair");
-        
+
         botaoSair.addActionListener(e -> {
             System.out.println("clicou em Sair");
             System.exit(0);
@@ -34,7 +33,7 @@ public class MenuPrincipal extends JFrame {
         botaoListar.addActionListener(e -> {
             System.out.println("clicou em Listar");
             JPopupMenu submenuListar = new JPopupMenu();
-            
+
             JMenuItem itemPaciente = new JMenuItem("Paciente");
             JMenuItem itemMedico = new JMenuItem("Médico");
             JMenuItem itemConsulta = new JMenuItem("Consulta");
@@ -51,19 +50,14 @@ public class MenuPrincipal extends JFrame {
             submenuListar.add(itemConvenio);
 
             submenuListar.show(botaoListar, 0, botaoListar.getHeight());
-            // TO DO - ERRO NA IMPRESSÃO DO MENU LISTAR PACIENTE, ESTÁ ACUMULANDO STRING AO INVÉS DE IMPRIMIR POR LINHA
-            for (String linha : textoMenu) {
-                areaTexto.append(linha + "\n");
-            }
         });
-        
+
         painel.add(botaoListar);
         painel.add(botaoSair);
 
-
         add(painel);
 
-        setSize(1200, 900);
+        setSize(1920, 1080);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
@@ -74,24 +68,46 @@ public class MenuPrincipal extends JFrame {
             JMenuItem item = (JMenuItem) e.getSource();
             String textoItem = item.getText();
 
-            // TO DO
-            // setTextoMenu tá funcionando certinho
-            // mas não tá atualizando o texto na tela
+            StringBuilder textoListar = new StringBuilder();
+            
             if (textoItem.equals("Paciente")) {
+                
                 System.out.println("clicou em Listar Paciente");
                 setTextoMenu(admin.ler(new Paciente()));
+                
             } else if (textoItem.equals("Médico")) {
                 System.out.println("clicou em Listar Médico");
                 setTextoMenu(admin.ler(new Medico()));
+                
             } else if (textoItem.equals("Consulta")) {
-                System.out.println("clicou em Listar Consulta");             
+                System.out.println("clicou em Listar Consulta");
                 setTextoMenu(admin.ler(new Consulta()));
+                
             } else if (textoItem.equals("Convênio")) {
                 System.out.println("clicou em Listar Convênio");
                 setTextoMenu(admin.ler(new Convenio()));
+                
             } else {
                 System.out.println("clicou em Listar");
+                // TO DO
+                // Mensagem de erro
             }
+
+            // -----------------------------------------------------------------
+            // FUNCIONANDO
+            // Atualiza o JTextArea do menu utilizando o StringBuilder
+            int lastIndex = textoMenu.size() - 1;
+            if (lastIndex >= 0) {
+                textoListar.append(textoMenu.get(lastIndex)).append("\n");
+            }
+            areaTexto.setText(textoListar.toString());
+
+            // Limpa o StringBuilder
+            textoListar.setLength(0);
+    
+            // Vai para o final do JTextArea
+            areaTexto.setCaretPosition(areaTexto.getDocument().getLength());
+            // -----------------------------------------------------------------
         }
     };
 
@@ -100,7 +116,10 @@ public class MenuPrincipal extends JFrame {
     }
 
     public void setTextoMenu(ArrayList<String> textoMenu) {
-        this.textoMenu = textoMenu;
+        System.out.println("Texto do antigo setTextoMenu eh: " + textoMenu + "\n");
+        this.textoMenu.clear(); // Clear the existing elements
+        this.textoMenu.addAll(textoMenu); // Add all the elements from the new list
+        System.out.println("Texto do novo setTextoMenu eh: " + this.textoMenu + "\n");
     }    
 }
 
