@@ -37,10 +37,23 @@ public abstract class Procedimento {
         return this.idConsulta;
     }
 
+    // atualizarDiagnostico cria um novo diagnostico e o associa a consulta do
+    // cliente
     public void atualizarDiagnostico(String doenca, String descricao, Medico medicoExame, LocalDate data,
             String descricaoExame, String conclusao) {
+        // Note que pode haver um atualizacao do medico responsavel por fazer o
+        // procedimento
         Diagnostico diagnostico = new Diagnostico(doenca, descricaoExame, medicoExame, this.idConsulta);
         diagnostico.atualizarProcedimento(medicoExame, data, descricaoExame, conclusao);
+        this.medicoProcedimento.getConsultaByID(idConsulta);
+    }
+
+    public void atualizarDiagnostico(String doenca, String descricao, Medico medicoCirurgia, LocalDate data,
+            String tipoCirurgia) {
+        // Note que pode haver um atualizacao do medico responsavel por fazer o
+        // procedimento
+        Diagnostico diagnostico = new Diagnostico(doenca, descricao, medicoCirurgia, idConsulta);
+        diagnostico.atualizarProcedimento(medicoCirurgia, data, tipoCirurgia);
         this.medicoProcedimento.getConsultaByID(idConsulta);
     }
 

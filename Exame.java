@@ -15,4 +15,21 @@ public class Exame extends Procedimento {
         this.descricaoExame = "";
         this.conclusao = "";
     }
+
+    public String getDescricaoExame() {
+        return this.descricaoExame;
+    }
+
+    public void setDescricaoExame(String descricaoExame) {
+        this.descricaoExame = descricaoExame;
+    }
+
+    public String getConclusao() {
+        return this.conclusao;
+    }
+
+    public void setConclusao(String conclusao) {
+        this.conclusao = conclusao;
+    }
+
 }

@@ -7,9 +7,9 @@ public class Consulta {
     Diagnostico diagnostico;
     Medico medicoAtendimento;
     LocalDate data;
-    Random rand = new Random();
 
     public Consulta(Paciente paciente, Medico medicoAtendimento, LocalDate data) {
+        Random rand = new Random();
         this.paciente = paciente;
         // Inicialmente nao ha um diagnostico, sendo necessario que o medico que possui
         // acesso a consulta o gere

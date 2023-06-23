@@ -31,7 +31,7 @@ public class Diagnostico {
     public void atualizarProcedimento(Medico medicoExame, LocalDate data, String descricaoExame, String conclusao) {
         Exame exame = new Exame(medicoExame, data, descricaoExame, conclusao, this.idConsulta);
 
-        // Remove a consulta do medicoAtendimento e passa ela para o medicoExame;
+        // Remove a consulta do medicoAtendimento e passa a mesma para o medicoExame;
         Consulta consulta = medicoAtendimento.getConsultaByID(idConsulta);
         for (int i = 0; i < medicoAtendimento.getListaConsultas().size(); i++) {
             if (medicoAtendimento.getListaConsultas().get(i).equals(consulta)) {
@@ -45,7 +45,7 @@ public class Diagnostico {
 
     public void atualizarProcedimento(Medico medicoCirurgia, LocalDate data, String tipoCirurgia) {
         Cirurgia cirurgia = new Cirurgia(medicoCirurgia, data, tipoCirurgia, this.idConsulta);
-        // Remove a consulta do medicoAtendimento e passa ela para o medicoExame;
+        // Remove a consulta do medicoAtendimento e passa a mesma para o medicoCirurgia;
         Consulta consulta = medicoAtendimento.getConsultaByID(idConsulta);
         for (int i = 0; i < medicoAtendimento.getListaConsultas().size(); i++) {
             if (medicoAtendimento.getListaConsultas().get(i).equals(consulta)) {
