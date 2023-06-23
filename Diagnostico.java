@@ -28,6 +28,10 @@ public class Diagnostico {
         this.procedimento = new Exame();
     }
 
+    // atualizarProcedimento cria um novo procedimento (exame/cirurgia) e direciona
+    // a consulta para o novo medico (necessario para poder acessar e atualizar
+    // continuamente o diagnostico do paciente com cada novo procedimento realizado,
+    // caso necessario)
     public void atualizarProcedimento(Medico medicoExame, LocalDate data, String descricaoExame, String conclusao) {
         Exame exame = new Exame(medicoExame, data, descricaoExame, conclusao, this.idConsulta);
 

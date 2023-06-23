@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public abstract class Hospital {
     ArrayList<Medico> listaMedicos;
-    ArrayList<Consulta> listaConsultas;
     ArrayList<Paciente> listaPacientes;
     String tipo;
     final String cnpj;
@@ -15,7 +14,6 @@ public abstract class Hospital {
         this.id = 0;
 
         this.listaMedicos = new ArrayList<Medico>();
-        this.listaConsultas = new ArrayList<Consulta>();
         this.listaPacientes = new ArrayList<Paciente>();
         this.tipo = tipo;
         this.nome = nome;
@@ -24,10 +22,6 @@ public abstract class Hospital {
 
     public ArrayList<Medico> getListaMedicos() {
         return this.listaMedicos;
-    }
-
-    public ArrayList<Consulta> getListaConsultas() {
-        return this.listaConsultas;
     }
 
     public ArrayList<Paciente> getListaPacientes() {
