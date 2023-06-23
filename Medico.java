@@ -22,19 +22,15 @@ public class Medico extends Pessoa {
         this.listaConsultas = new ArrayList<Consulta>();
     }
 
-    // TO DO
-    // public Procedimento gerarDiagnostico(String doenca, String descricao, Medico medicoExame, String descricaoExame,
-    //         String conclusao) {
-    //     // Marcar exame
-    //     Exame newExame = new Exame(medicoExame, dataNascimento, descricaoExame, conclusao);
-    //     return newExame;
-    // }
+    public Consulta getConsultaByID(int id) {
+        for (int i = 0; i < listaConsultas.size(); i++) {
+            if (listaConsultas.get(i).getId() == id) {
+                return listaConsultas.get(i);
+            }
+        }
 
-    // public Diagnostico gerarDiagnostico(String doenca, String descricao, LocalDate data, Medico medicoCirurgia,
-    //         String tipoCirurgia) {
-    //     // Marcar cirurgia
-
-    // }
+        return null;
+    }
 
     public String getCRM() {
         return CRM;

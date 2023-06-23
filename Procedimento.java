@@ -1,30 +1,28 @@
 import java.time.LocalDate;
-import java.util.Random;
 
 public abstract class Procedimento {
-    Medico medico;
+    Medico medicoProcedimento;
     LocalDate data;
-    final int id;
+    int idConsulta;
 
-    public Procedimento(Medico medico, LocalDate data) {
-        Random random = new Random();
-        this.id = random.nextInt(1000);
-        this.medico = medico;
+    public Procedimento(Medico medicoProcedimento, LocalDate data, int idConsulta) {
+        this.medicoProcedimento = medicoProcedimento;
         this.data = data;
+        this.idConsulta = idConsulta;
     }
 
     public Procedimento() {
-        this.medico = new Medico();
+        this.medicoProcedimento = new Medico();
         this.data = LocalDate.now();
-        this.id = 0;
+        this.idConsulta = -1;
     }
 
-    public Medico getMedico() {
-        return this.medico;
+    public Medico getMedicoProcedimento() {
+        return this.medicoProcedimento;
     }
 
-    public void setMedico(Medico medico) {
-        this.medico = medico;
+    public void setMedicoProcedimento(Medico medico) {
+        this.medicoProcedimento = medico;
     }
 
     public LocalDate getData() {
@@ -33,6 +31,17 @@ public abstract class Procedimento {
 
     public void setData(LocalDate data) {
         this.data = data;
+    }
+
+    public int getIdConsulta() {
+        return this.idConsulta;
+    }
+
+    public void atualizarDiagnostico(String doenca, String descricao, Medico medicoExame, LocalDate data,
+            String descricaoExame, String conclusao) {
+        Diagnostico diagnostico = new Diagnostico(doenca, descricaoExame, medicoExame, this.idConsulta);
+        diagnostico.atualizarProcedimento(medicoExame, data, descricaoExame, conclusao);
+        this.medicoProcedimento.getConsultaByID(idConsulta);
     }
 
 }

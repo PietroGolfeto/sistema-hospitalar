@@ -1,30 +1,59 @@
-import java.util.Random;
+import java.time.LocalDate;
+
 public class Diagnostico {
     String doenca;
     String descricao;
-    Medico medico;
+    Medico medicoAtendimento;
     Procedimento procedimento;
-    final int id;
+    int idConsulta;
 
     // Todo diagnostico tera um procedimento prescrito para o paciente
-    public Diagnostico(String doenca, String descricao, Medico medico, Procedimento procedimento) {
-        Random random = new Random();
-        this.id = random.nextInt(1000);
+    public Diagnostico(String doenca, String descricao, Medico medicoAtendimento,
+            int idConsulta) {
+        this.idConsulta = idConsulta;
         this.doenca = doenca;
         this.descricao = descricao;
-        this.medico = medico;
-        this.procedimento = procedimento;
+        this.medicoAtendimento = medicoAtendimento;
+        this.procedimento = null;
     }
 
     public Diagnostico() {
-        Random random = new Random();
-        this.id = random.nextInt(1000);
+        this.idConsulta = -1;
         this.doenca = "";
         this.descricao = "";
-        this.medico = new Medico();
+        this.medicoAtendimento = new Medico();
         // TO DO
         // Não pode instanciar classe abstrata
         // this.procedimento = new Procedimento();
         this.procedimento = new Exame();
+    }
+
+    public void atualizarProcedimento(Medico medicoExame, LocalDate data, String descricaoExame, String conclusao) {
+        Exame exame = new Exame(medicoExame, data, descricaoExame, conclusao, this.idConsulta);
+
+        // Remove a consulta do medicoAtendimento e passa ela para o medicoExame;
+        Consulta consulta = medicoAtendimento.getConsultaByID(idConsulta);
+        for (int i = 0; i < medicoAtendimento.getListaConsultas().size(); i++) {
+            if (medicoAtendimento.getListaConsultas().get(i).equals(consulta)) {
+                medicoAtendimento.getListaConsultas().remove(i);
+                medicoExame.getListaConsultas().add(consulta);
+                break;
+            }
+        }
+        this.procedimento = exame;
+    }
+
+    public void atualizarProcedimento(Medico medicoCirurgia, LocalDate data, String tipoCirurgia) {
+        Cirurgia cirurgia = new Cirurgia(medicoCirurgia, data, tipoCirurgia, this.idConsulta);
+        // Remove a consulta do medicoAtendimento e passa ela para o medicoExame;
+        Consulta consulta = medicoAtendimento.getConsultaByID(idConsulta);
+        for (int i = 0; i < medicoAtendimento.getListaConsultas().size(); i++) {
+            if (medicoAtendimento.getListaConsultas().get(i).equals(consulta)) {
+                medicoAtendimento.getListaConsultas().remove(i);
+                medicoCirurgia.getListaConsultas().add(consulta);
+                break;
+            }
+        }
+        this.procedimento = cirurgia;
     }
 }
