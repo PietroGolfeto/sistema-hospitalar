@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ArquivosOperacao implements Arquivos<Object> {
@@ -166,31 +164,22 @@ public class ArquivosOperacao implements Arquivos<Object> {
                         break;
 
                     default:
-                        // TO DO
-                        // CRIAR UM TIPO DE ERRO PARA QUANDO O OBJETO NÃO FOR ENCONTRADO
+                        // Erro customizado caso o objeto não seja encontrado
                         throw new ObjectNotFoundException("Objeto não encontrado");
-                        System.out.println("Objeto não encontrado");
-                        break;
                 }
-            } catch (IOException e) {
-                // TO DO
-                // Tratar exceção; não pode só imprimir mensagem de erro
-                System.out.println(e.getMessage());
+            } catch (ObjectNotFoundException e) {
+                System.err.println("Objeto não encontrado");                    
+            } catch(IOException e) {
+                System.err.println(e.getMessage());
             }
-        } catch (
-
-        Exception e) {
-            // TO DO
-            // Tratar exceção; não pode só imprimir mensagem de erro
-            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
         }
         return dadosRetorno;
     }
 
     @Override
     public Object escrever(Object objeto) {
-        // TO DO
-        // FALTA SEPARAR DE ACORDO COM A CLASSE DA MESMA FORMA E ESCREVER NO CSV
 
         System.out.println("Escrevendo arquivo: ");
         String caminho = "arquivosCSV/" + objeto.getClass().getSimpleName() + ".csv";
@@ -201,6 +190,7 @@ public class ArquivosOperacao implements Arquivos<Object> {
 
             switch (objeto.getClass().getSimpleName()) {
                 case "Paciente":
+                    // CPF_PESSOA,NOME_PESSOA,TELEFONE,ENDERECO,EMAIL,DATA_NASCIMENTO,GENERO,ALTURA,PESO,TIPO_SANGUINEO,CODIGO_CONVENIO
                     Paciente paciente = (Paciente) objeto;
 
                     sb.append(paciente.getCpf() + "," + paciente.getNome() + "," + paciente.getTelefone() + ","
@@ -213,6 +203,7 @@ public class ArquivosOperacao implements Arquivos<Object> {
                     break;
 
                 case "Medico":
+                    // CPF_PESSOA,NOME_PESSOA,TELEFONE,ENDERECO,EMAIL,DATA_NASCIMENTO,GENERO,CRM,AREA_ATUACAO,LISTA_ID_CONSULTAS_PROCEDIMENTO
                     Medico medico = (Medico) objeto;
                     sb.append(medico.getCpf() + "," + medico.getNome() + "," + medico.getTelefone() + ","
                             + medico.getEndereco() + "," + medico.getEmail() + "," + medico.getDataNascimento()
@@ -227,37 +218,68 @@ public class ArquivosOperacao implements Arquivos<Object> {
                     break;
 
                 case "Consulta":
-                    // TO DO
-                    // Escrever no arquivo CSV
+                    // ID,CPF_PACIENTE,CPF_MEDICO_CONSULTA,DATA_CONSULTA,DOENCA,CPF_MEDICO_PROCEDIMENTO,DATA_PROCEDIMENTO,VALOR
+                    Consulta consulta = (Consulta) objeto;
+                    sb.append(consulta.getId() + "," + consulta.getPaciente().getCpf() + ","
+                            + consulta.getMedicoAtendimento().getCpf() + "," + consulta.getData().toString() + ","
+                            + consulta.getDiagnostico().getDoenca() + ","
+                            + consulta.getDiagnostico().getProcedimento().getMedicoProcedimento().getCpf() + ","
+                            + consulta.getDiagnostico().getProcedimento().getData().toString() + ","
+                            + consulta.getValor());
+                    writer.write(sb.toString());
+                    writer.newLine();
                     break;
 
                 case "Convenio":
-                    // TO DO
-                    // Escrever no arquivo CSV
+                    // CODIGO,NOME,DATA_VALIDADE,MULTIPLICADOR_DESCONTO
+                    Convenio convenio = (Convenio) objeto;
+                    sb.append(convenio.getCodigo() + "," + convenio.getNome() + "," + convenio.getDataValidade()
+                            + "," + convenio.getMultiplicadorDesconto());
+                    writer.write(sb.toString());
+                    writer.newLine();
                     break;
 
                 case "Hospital":
-                    // TO DO
-                    // Escrever no arquivo CSV
+                    // ID,CNPJ,NOME,TIPO,LISTA_CPF_MEDICOS,LISTA_CPF_PACIENTES,LISTA_ID_CONSULTAS
+                    Hospital hospital = (Hospital) objeto;
+                    sb.append(hospital.getId() + "," + hospital.getCnpj() + "," + hospital.getNome() + ","
+                            + hospital.getTipo() + ",");
+                    for (int i = 0; i < hospital.getListaMedicos().size(); i++) {
+                        sb.append(hospital.getListaMedicos().get(i).getCpf() + ",");
+                    }
+                    for (int i = 0; i < hospital.getListaPacientes().size(); i++) {
+                        sb.append(hospital.getListaPacientes().get(i).getCpf() + ",");
+                    }
+                    for (int i = 0; i < hospital.getListaConsultas().size(); i++) {
+                        sb.append(hospital.getListaConsultas().get(i).getId() + ",");
+                    }
+                    writer.write(sb.toString());
+                    writer.newLine();
                     break;
 
                 case "Exame":
-                    // TO DO
-                    // Escrever no arquivo CSV
+                    // NOME,SALA,MEDICO_EXAME,DATA,LAUDO,ID_CONSULTA
+                    Exame exame = (Exame) objeto;
+                    sb.append(exame.getNome() + "," + exame.getSala() + ","
+                            + exame.getMedicoProcedimento().getCpf() + "," + exame.getData().toString() + ","
+                            + exame.getLaudo() + "," + exame.getIdConsulta());
                     break;
 
                 case "Cirurgia":
-                    // TO DO
-                    // Escrever no arquivo CSV
+                    // NOME,SALA,MEDICO,DATA,TIPO_CIRURGIA,ID_CONSULTA
+                    Cirurgia cirurgia = (Cirurgia) objeto;
+                    sb.append(cirurgia.getNome() + "," + cirurgia.getSala() + ","
+                            + cirurgia.getMedicoProcedimento().getCpf() + "," + cirurgia.getData().toString() + ","
+                            + cirurgia.getTipoCirurgia() + "," + cirurgia.getIdConsulta());
                     break;
 
                 default:
-                    // TO DO
-                    // Tratar exceção; não pode só imprimir mensagem de erro
-                    System.out.println("Objeto não encontrado");
-                    break;
+                    // Erro customizado caso o objeto não seja encontrado
+                    throw new ObjectNotFoundException("Objeto não encontrado");
             }
-        } catch (IOException e) {
+        } catch (ObjectNotFoundException e) {
+            System.err.println("Objeto não encontrado");
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

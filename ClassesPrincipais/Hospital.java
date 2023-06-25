@@ -21,15 +21,16 @@ public abstract class Hospital {
         this.tipo = tipo;
         this.nome = nome;
         this.cnpj = cnpj;
-        receita = 0.0;
+        this.receita = 0.0;
     }
 
     public void calcularReceita() {
-        double receitaSum = 0.0;
+        // Percore consultas e soma o valor
+        double receitaHospital = 0.0;
         for (int i = 0; i < listaConsultas.size(); i++) {
-            receitaSum += listaConsultas.get(i).getValor();
+            receitaHospital += listaConsultas.get(i).getValor();
         }
-        this.receita = receitaSum;
+        setReceita(receitaHospital);
     }
 
     public ArrayList<Medico> getListaMedicos() {
@@ -86,6 +87,14 @@ public abstract class Hospital {
 
     public void setListaConsultas(ArrayList<Consulta> listaConsultas) {
         this.listaConsultas = listaConsultas;
+    }
+
+    public double getReceita() {
+        return receita;
+    }
+
+    public void setReceita(double receita) {
+        this.receita = receita;
     }
 
 }
