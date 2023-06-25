@@ -9,6 +9,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JMenuItem;
 import javax.swing.JCheckBox;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +21,9 @@ public class MenuCadastrar extends JFrame {
 
     public MenuCadastrar() {
         setTitle("Sistema de gerenciamento hospitalar");
+        
+        // Lista contendo todos os hospitais
+        ArrayList<Hospital> listaHospitais = lerHospitais();
 
         JPanel painel = new JPanel();
 
@@ -35,11 +40,10 @@ public class MenuCadastrar extends JFrame {
             // Cadastrar Paciente
             itemPaciente.addActionListener(k -> {
                 System.out.println("Clicou em cadastrar paciente");
-                painel.setLayout(new GridLayout(2, 10));
 
-                // TO DO
-                // Criar uma check box com uma lista de todos os hospitais disponiveis no csv para cadastrar o paciente
-                Hospital hospital = null;
+
+                painel.setLayout(new GridBagLayout());
+                GridBagConstraints gbc = new GridBagConstraints();
 
                 // Label
                 JLabel labelNome = new JLabel("Digite o nome: ");
@@ -48,16 +52,44 @@ public class MenuCadastrar extends JFrame {
                 // Input
                 JTextArea campoNome = new JTextArea(8, 30);
                 JTextArea campoCPF = new JTextArea(8, 11);
-
+                
                 // Nome
-                painel.add(labelNome);
-                painel.add(campoNome);
-
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.gridwidth = 1;
+                gbc.gridheight = 1;
+                painel.add(labelNome, gbc);
+                
+                gbc.gridx = 1;
+                gbc.gridy = 0;
+                gbc.gridwidth = 2;
+                gbc.gridheight = 1;
+                painel.add(campoNome, gbc);
+                
                 // CPF
-                painel.add(labelCPF);
-                painel.add(campoCPF);
-
+                gbc.gridx = 0;
+                gbc.gridy = 1;
+                gbc.gridwidth = 1;
+                gbc.gridheight = 1;
+                painel.add(labelCPF, gbc);
+                
+                gbc.gridx = 1;
+                gbc.gridy = 1;
+                gbc.gridwidth = 2;
+                gbc.gridheight = 1;
+                painel.add(campoCPF, gbc);
+                
                 // etc
+                // TO DO
+                // Criar uma check box com uma lista de todos os hospitais disponiveis no csv para cadastrar o paciente
+                ArrayList<JCheckBox> listaCheckBoxes = new ArrayList<JCheckBox>();
+                for(int i=0; i<listaHospitais.size(); i++){
+                    JCheckBox hospital = new JCheckBox(listaHospitais.get(i).getNome());
+                    listaCheckBoxes.add(hospital);
+                    painel.add(listaCheckBoxes.get(i));
+                }
+        
+                
             });
 
             // Cadastrar Medico
@@ -67,14 +99,14 @@ public class MenuCadastrar extends JFrame {
             itemHospital.addActionListener(k -> {
                 System.out.println("ok");
             });
-
+            
             submenuOpcao.add(itemPaciente);
             submenuOpcao.add(itemMedico);
             submenuOpcao.add(itemHospital);
 
             submenuOpcao.show(botaoOpcao, 0, botaoOpcao.getHeight());
         });
-
+        
         painel.add(botaoOpcao);
 
         add(painel);
