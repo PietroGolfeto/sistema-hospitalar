@@ -17,12 +17,15 @@ public class MenuPrincipal extends JFrame {
     public MenuPrincipal() {
         setTitle("Sistema de gerenciamento hospitalar");
 
+        // Cria o paine
         JPanel painel = new JPanel();
         areaTexto = new JTextArea(40, 100);
         JScrollPane scroll = new JScrollPane(areaTexto);
         painel.add(scroll);
 
+        // Define os botoes
         JButton botaoListar = new JButton("Listar");
+        JButton boraoCadastrar = new JButton("Cadastrar");
         JButton botaoSair = new JButton("Sair");
 
         botaoSair.addActionListener(e -> {
@@ -52,6 +55,12 @@ public class MenuPrincipal extends JFrame {
             submenuListar.show(botaoListar, 0, botaoListar.getHeight());
         });
 
+        boraoCadastrar.addActionListener(e -> {
+            System.out.println("Clicou em cadastrar");
+            MenuCadastrar menuCadastrar = new MenuCadastrar();
+            System.exit(0);
+        });
+
         painel.add(botaoListar);
         painel.add(botaoSair);
 
@@ -69,24 +78,24 @@ public class MenuPrincipal extends JFrame {
             String textoItem = item.getText();
 
             StringBuilder textoListar = new StringBuilder();
-            
+
             if (textoItem.equals("Paciente")) {
-                
+
                 System.out.println("clicou em Listar Paciente");
                 setTextoMenu(admin.ler(new Paciente()));
-                
+
             } else if (textoItem.equals("Médico")) {
                 System.out.println("clicou em Listar Médico");
                 setTextoMenu(admin.ler(new Medico()));
-                
+
             } else if (textoItem.equals("Consulta")) {
                 System.out.println("clicou em Listar Consulta");
                 setTextoMenu(admin.ler(new Consulta()));
-                
+
             } else if (textoItem.equals("Convênio")) {
                 System.out.println("clicou em Listar Convênio");
                 setTextoMenu(admin.ler(new Convenio()));
-                
+
             } else {
                 System.out.println("clicou em Listar");
                 // TO DO
@@ -104,7 +113,7 @@ public class MenuPrincipal extends JFrame {
 
             // Limpa o StringBuilder
             textoListar.setLength(0);
-    
+
             // Vai para o final do JTextArea
             areaTexto.setCaretPosition(areaTexto.getDocument().getLength());
             // -----------------------------------------------------------------
@@ -118,32 +127,31 @@ public class MenuPrincipal extends JFrame {
     public void setTextoMenu(ArrayList<String> textoMenu) {
         this.textoMenu.clear(); // Limpa a lista
         this.textoMenu.addAll(textoMenu); // Adiciona os dados da lista passada como parâmetro
-    }    
+    }
 }
 
-        // botaoPaciente.addActionListener(e -> {
-        //     System.out.println("clicou em Paciente");
-        // });
+// botaoPaciente.addActionListener(e -> {
+// System.out.println("clicou em Paciente");
+// });
 
-        // botaoMedico.addActionListener(e -> {
-        //     System.out.println("clicou em Médico");
-        // });
+// botaoMedico.addActionListener(e -> {
+// System.out.println("clicou em Médico");
+// });
 
-        // botaoConsulta.addActionListener(e -> {
-        //     System.out.println("clicou em Consulta");
-        // });
+// botaoConsulta.addActionListener(e -> {
+// System.out.println("clicou em Consulta");
+// });
 
-        // botaoConvenio.addActionListener(e -> {
-        //     System.out.println("clicou em Convênio");
-        // });
+// botaoConvenio.addActionListener(e -> {
+// System.out.println("clicou em Convênio");
+// });
 
-        
-        // painel.add(botaoPaciente);
-        // painel.add(botaoMedico);
-        // painel.add(botaoConsulta);
-        // painel.add(botaoConvenio);
+// painel.add(botaoPaciente);
+// painel.add(botaoMedico);
+// painel.add(botaoConsulta);
+// painel.add(botaoConvenio);
 
-                // JButton botaoPaciente = new JButton("Paciente");
-        // JButton botaoMedico = new JButton("Médico");
-        // JButton botaoConsulta = new JButton("Consulta");
-        // JButton botaoConvenio = new JButton("Convênio");
+// JButton botaoPaciente = new JButton("Paciente");
+// JButton botaoMedico = new JButton("Médico");
+// JButton botaoConsulta = new JButton("Consulta");
+// JButton botaoConvenio = new JButton("Convênio");
