@@ -50,20 +50,13 @@ public class MenuCadastrar {
     private JTextField fieldNomeHospital;
 
     /**
-     * Launch the application.
+     * try {
+     * MenuCadastrar window = new MenuCadastrar();
+     * window.frmMenuDeCadastro.setVisible(true);
+     * } catch (Exception e) {
+     * e.printStackTrace();
+     * }
      */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    MenuCadastrar window = new MenuCadastrar();
-                    window.frmMenuDeCadastro.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
     /**
      * Create the application.
@@ -221,10 +214,9 @@ public class MenuCadastrar {
         boxTipoSanguinio.setBounds(634, 236, 43, 21);
         panel.add(boxTipoSanguinio);
 
-        // TO DO 
+        // TO DO
         // Lucas instancia um hospital com nome "..." se precisar
-        ArrayList<Hospital> hospitaisCadastrados = ArquivosOperacao.lerArquivoHospital();
-
+        ArrayList<Hospital> hospitaisCadastrados = .lerArquivoHospital();
 
         ArrayList<String> hospitais = new ArrayList<String>();
         hospitais.add("...");
