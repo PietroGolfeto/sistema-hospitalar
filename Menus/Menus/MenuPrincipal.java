@@ -1,9 +1,12 @@
+package Menus;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
 
+import Arquivos.Arquivos.ArquivosOperacao;
 import ClassesPrincipais.Consulta;
 import ClassesPrincipais.Convenio;
 import ClassesPrincipais.Medico;
@@ -31,7 +34,7 @@ public class MenuPrincipal extends JFrame {
 
         // Define os botoes
         JButton botaoListar = new JButton("Listar");
-        JButton boraoCadastrar = new JButton("Cadastrar");
+        JButton botaoCadastrar = new JButton("Cadastrar");
         JButton botaoSair = new JButton("Sair");
 
         botaoSair.addActionListener(e -> {
@@ -61,13 +64,16 @@ public class MenuPrincipal extends JFrame {
             submenuListar.show(botaoListar, 0, botaoListar.getHeight());
         });
 
-        boraoCadastrar.addActionListener(e -> {
+        botaoCadastrar.addActionListener(e -> {
             System.out.println("Clicou em cadastrar");
             MenuCadastrar menuCadastrar = new MenuCadastrar();
             System.exit(0);
         });
 
         painel.add(botaoListar);
+        // TO DO
+        // Coloquei o botão cadastrar aqui para testar, mas quebra quando clico
+        painel.add(botaoCadastrar);
         painel.add(botaoSair);
 
         add(painel);

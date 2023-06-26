@@ -1,3 +1,5 @@
+package Menus;
+
 import java.awt.EventQueue;
 import java.util.ArrayList;
 
@@ -14,6 +16,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import Arquivos.Arquivos.ArquivosOperacao;
 import ClassesPrincipais.Hospital;
 
 import javax.swing.JButton;
@@ -216,7 +219,7 @@ public class MenuCadastrar {
 
         // TO DO
         // Lucas instancia um hospital com nome "..." se precisar
-        ArrayList<Hospital> hospitaisCadastrados = .lerArquivoHospital();
+        ArrayList<Hospital> hospitaisCadastrados = ArquivosOperacao.lerArquivoHospital();
 
         ArrayList<String> hospitais = new ArrayList<String>();
         hospitais.add("...");
