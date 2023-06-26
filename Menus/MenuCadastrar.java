@@ -13,6 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import ClassesPrincipais.Hospital;
+
 import javax.swing.JButton;
 import java.awt.Component;
 import javax.swing.Box;
@@ -217,6 +220,11 @@ public class MenuCadastrar {
         });
         boxTipoSanguinio.setBounds(634, 236, 43, 21);
         panel.add(boxTipoSanguinio);
+
+        // TO DO 
+        // Lucas instancia um hospital com nome "..." se precisar
+        ArrayList<Hospital> hospitaisCadastrados = ArquivosOperacao.lerArquivoHospital();
+
 
         ArrayList<String> hospitais = new ArrayList<String>();
         hospitais.add("...");

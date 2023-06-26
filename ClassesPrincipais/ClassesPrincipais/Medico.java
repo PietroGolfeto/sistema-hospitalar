@@ -1,3 +1,4 @@
+package ClassesPrincipais;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -46,6 +47,10 @@ public class Medico extends Pessoa {
 
     public ArrayList<Consulta> getListaConsultas() {
         return listaConsultas;
+    }
+
+    public void setListaConsultas(ArrayList<Consulta> listaConsultas) {
+        this.listaConsultas = listaConsultas;
     }
 
     

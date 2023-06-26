@@ -1,9 +1,10 @@
+package ClassesPrincipais;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Paciente extends Pessoa {
     // Classe aninhada para representar o prontuário do paciente
-    class Prontuario {
+    public class Prontuario {
         private double altura;
         private double peso;
         private final String tipoSanguinio;
@@ -45,14 +46,12 @@ public class Paciente extends Pessoa {
     private Prontuario prontuario;
     private Convenio convenio;
 
-    public Paciente(String cpf, String nome, String telefone, String email, String endereco, LocalDate dataNascimento,
-            String genero, double altura, double peso, String tipoSanguinio) {
+    public Paciente(String cpf, String nome, String telefone, String endereco, String email, LocalDate dataNascimento,
+            String genero, double altura, double peso, String tipoSanguinio, Convenio convenio) {
         super(cpf, nome, telefone, email, endereco, dataNascimento, genero);
         this.prontuario = new Prontuario(altura, peso, tipoSanguinio);
-        // TO DO
-        // O paciente não precisa ter um convenio, mas pode ter para obter desconto
-        // LIXO PARA TESTAR MAIN -> REMOVER DEPOIS
-        this.convenio = new Convenio(LocalDate.now(), "teste", 0.1);
+        // O paciente terá convênio particular (código 000000) caso não possua convênio
+        this.convenio = convenio;
     }
 
     // Construtor sem parâmetros para manipulação de arquivos

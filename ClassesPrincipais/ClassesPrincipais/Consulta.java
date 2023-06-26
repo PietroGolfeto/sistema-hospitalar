@@ -1,3 +1,4 @@
+package ClassesPrincipais;
 import java.time.LocalDate;
 import java.util.Random;
 
@@ -26,6 +27,8 @@ public class Consulta {
         this.diagnostico = new Diagnostico();
         this.medicoAtendimento = new Medico();
         this.id = -1;
+        this.valor = 0.0;
+        this.data = LocalDate.now();
     }
 
     public double getValor() {

@@ -1,6 +1,8 @@
+package ClassesPrincipais;
 import java.util.ArrayList;
+import java.util.Random;
 
-public abstract class Hospital {
+public class Hospital {
     ArrayList<Medico> listaMedicos;
     ArrayList<Paciente> listaPacientes;
     ArrayList<Consulta> listaConsultas;
@@ -10,11 +12,25 @@ public abstract class Hospital {
     String nome;
     double receita;
 
+    // Hospital sem id, gera aleatório
     public Hospital(String tipo, String nome, String cnpj) {
         // TO DO
         // Gera id aleatorio, checa se já existe no CSV
-        this.id = 0;
+        Random random = new Random();
+        this.id = random.nextInt(1000);
 
+        this.listaMedicos = new ArrayList<Medico>();
+        this.listaPacientes = new ArrayList<Paciente>();
+        this.listaConsultas = new ArrayList<Consulta>();
+        this.tipo = tipo;
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.receita = 0.0;
+    }
+
+    // Hospital com id
+    public Hospital(String tipo, String nome, String cnpj, int id) {
+        this.id = id;
         this.listaMedicos = new ArrayList<Medico>();
         this.listaPacientes = new ArrayList<Paciente>();
         this.listaConsultas = new ArrayList<Consulta>();

@@ -1,3 +1,4 @@
+package ClassesPrincipais;
 import java.time.LocalDate;
 import java.util.Random;
 
@@ -7,9 +8,18 @@ public class Convenio {
     String nome;
     double multiplicadorDesconto;
 
+    // Convênio com código gerado de forma aleatória
     public Convenio(LocalDate dataValidade, String nome, double multiplicadorDesconto) {
         Random random = new Random();
         this.codigo = random.nextInt(1000);
+        this.nome = nome;
+        this.dataValidade = dataValidade;
+        this.multiplicadorDesconto = multiplicadorDesconto;
+    }
+
+    // Convênio instanciado do CSV já possui código
+    public Convenio(int codigo, String nome, LocalDate dataValidade, double multiplicadorDesconto) {
+        this.codigo = codigo;
         this.nome = nome;
         this.dataValidade = dataValidade;
         this.multiplicadorDesconto = multiplicadorDesconto;
