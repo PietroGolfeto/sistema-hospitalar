@@ -1,4 +1,4 @@
-package ClassesPrincipais;
+
 import java.time.LocalDate;
 
 public class Cirurgia extends Procedimento {

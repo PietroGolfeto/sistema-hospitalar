@@ -1,17 +1,8 @@
-package Menus;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
-
-import Arquivos.Arquivos.ArquivosOperacao;
-import ClassesPrincipais.Consulta;
-import ClassesPrincipais.Convenio;
-import ClassesPrincipais.Medico;
-import ClassesPrincipais.Paciente;
-
 import javax.swing.JScrollPane;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionEvent;

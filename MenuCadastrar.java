@@ -1,5 +1,3 @@
-package Menus;
-
 import java.awt.EventQueue;
 import java.util.ArrayList;
 
@@ -15,9 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
-import Arquivos.Arquivos.ArquivosOperacao;
-import ClassesPrincipais.Hospital;
 
 import javax.swing.JButton;
 import java.awt.Component;

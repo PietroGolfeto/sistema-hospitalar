@@ -1,4 +1,4 @@
-package Arquivos.Arquivos;
+
 import java.util.ArrayList;
 public interface Arquivos<T> {
     public ArrayList<String> ler(T objeto);

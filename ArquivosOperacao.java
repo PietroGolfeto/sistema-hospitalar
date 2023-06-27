@@ -1,4 +1,4 @@
-package Arquivos.Arquivos;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,14 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
-import ClassesPrincipais.Cirurgia;
-import ClassesPrincipais.Consulta;
-import ClassesPrincipais.Convenio;
-import ClassesPrincipais.Exame;
-import ClassesPrincipais.Hospital;
-import ClassesPrincipais.Medico;
-import ClassesPrincipais.Paciente;
 
 public class ArquivosOperacao implements Arquivos<Object> {
     @Override
