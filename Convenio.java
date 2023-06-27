@@ -4,9 +4,9 @@ import java.util.Random;
 
 public class Convenio {
     final int codigo;
-    LocalDate dataValidade;
-    String nome;
-    double multiplicadorDesconto;
+    private LocalDate dataValidade;
+    private String nome;
+    private double multiplicadorDesconto;
 
     // Convênio com código gerado de forma aleatória
     public Convenio(LocalDate dataValidade, String nome, double multiplicadorDesconto) {

@@ -30,7 +30,7 @@ public class Diagnostico {
     // gerarProcedimento cria um novo procedimento (exame/cirurgia) e direciona
     // a consulta para o novo medico (necessario para poder acessar o diagnostico do
     // paciente e realizar o procedimento)
-    public void atualizarExame(String nome, String sala, Medico medicoExame, LocalDate data,
+    public void gerarExame(String nome, String sala, Medico medicoExame, LocalDate data,
             String laudo) {
         Exame exame = new Exame(nome, sala, medicoExame, data, laudo, this.idConsulta);
 

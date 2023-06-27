@@ -57,8 +57,12 @@ public class MenuPrincipal extends JFrame {
 
         botaoCadastrar.addActionListener(e -> {
             System.out.println("Clicou em cadastrar");
-            MenuCadastrar menuCadastrar = new MenuCadastrar();
-            System.exit(0);
+            try {
+                MenuCadastrar.getMenuDeCadastro();
+            } catch (Exception k) {
+                System.err.println(k.getMessage());
+                System.exit(0);
+            }
         });
 
         painel.add(botaoListar);

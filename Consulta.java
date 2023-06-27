@@ -15,7 +15,7 @@ public class Consulta {
         this.paciente = paciente;
         // Inicialmente nao ha um diagnostico, sendo necessario que o medico que possui
         // acesso a consulta o gere
-        valor = 200.0 * paciente.getConvenio().getMultiplicadorDesconto();
+        valor = 200.0 * this.paciente.getConvenio().getMultiplicadorDesconto();
         this.diagnostico = null;
         this.medicoAtendimento = medicoAtendimento;
         this.data = data;

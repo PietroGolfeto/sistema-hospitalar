@@ -2,33 +2,24 @@ import java.awt.EventQueue;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
-import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
 import java.awt.Font;
-import javax.swing.JToggleButton;
-import java.awt.Insets;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import javax.swing.JButton;
-import java.awt.Component;
 import javax.swing.Box;
 import java.awt.Color;
 import javax.swing.JSeparator;
-import javax.swing.JSplitPane;
-import javax.swing.JRadioButtonMenuItem;
-import java.awt.Choice;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class MenuCadastrar {
 
-    private JFrame frmMenuDeCadastro;
+    private JFrame MenuDeCadastro;
     private JTextField fieldNome;
     private JTextField fieldCPF;
     private JTextField fieldTelefone;
@@ -47,35 +38,19 @@ public class MenuCadastrar {
     private JTextField fieldCRMMedico;
     private JTextField fieldNomeHospital;
 
-    /**
-     * try {
-     * MenuCadastrar window = new MenuCadastrar();
-     * window.frmMenuDeCadastro.setVisible(true);
-     * } catch (Exception e) {
-     * e.printStackTrace();
-     * }
-     */
-
-    /**
-     * Create the application.
-     */
     public MenuCadastrar() {
-        initialize();
-    }
+        ArquivosOperacao admin = new ArquivosOperacao();
 
-    /**
-     * Initialize the contents of the frame.
-     */
-    private void initialize() {
-        frmMenuDeCadastro = new JFrame();
-        frmMenuDeCadastro.setTitle("Menu de Cadastro");
-        frmMenuDeCadastro.setBounds(100, 100, 966, 561);
-        frmMenuDeCadastro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frmMenuDeCadastro.getContentPane().setLayout(null);
+        System.out.println("Chamou menu cadastrar");
+        MenuDeCadastro = new JFrame();
+        MenuDeCadastro.setTitle("Menu de Cadastro");
+        MenuDeCadastro.setBounds(100, 100, 966, 561);
+        MenuDeCadastro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        MenuDeCadastro.getContentPane().setLayout(null);
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         tabbedPane.setBounds(10, 10, 932, 504);
-        frmMenuDeCadastro.getContentPane().add(tabbedPane);
+        MenuDeCadastro.getContentPane().add(tabbedPane);
 
         JPanel panel = new JPanel();
         tabbedPane.addTab("Paciente", null, panel, null);
@@ -214,17 +189,12 @@ public class MenuCadastrar {
 
         // TO DO
         // Lucas instancia um hospital com nome "..." se precisar
+        System.out.println("Chamou menu cadastrar 2");
         ArrayList<Hospital> hospitaisCadastrados = ArquivosOperacao.lerArquivoHospital();
 
-        ArrayList<String> hospitais = new ArrayList<String>();
-        hospitais.add("...");
-        hospitais.add("Albert Einstein");
-        hospitais.add("Hospital das Clinicas");
-
         final JComboBox boxHospital = new JComboBox();
-        for (int i = 0; i < hospitais.size(); i++) {
-            boxHospital.addItem(hospitais.get(i));
-            System.out.println("Item added");
+        for (int i = 0; i < hospitaisCadastrados.size(); i++) {
+            boxHospital.addItem(hospitaisCadastrados.get(i).getNome());
         }
 
         boxHospital.addActionListener(new ActionListener() {
@@ -353,8 +323,8 @@ public class MenuCadastrar {
                 System.out.println(boxHospitalMedico.getSelectedItem());
             }
         });
-        for (int i = 0; i < hospitais.size(); i++) {
-            boxHospitalMedico.addItem(hospitais.get(i));
+        for (int i = 0; i < hospitaisCadastrados.size(); i++) {
+            boxHospitalMedico.addItem(hospitaisCadastrados.get(i).getNome());
         }
 
         boxHospitalMedico.setToolTipText("");
@@ -446,4 +416,158 @@ public class MenuCadastrar {
         btnCadastrarMedico_1.setBounds(765, 414, 141, 53);
         panel_2.add(btnCadastrarMedico_1);
     }
+
+    public static void getMenuDeCadastro() {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    MenuCadastrar window = new MenuCadastrar();
+                    window.MenuDeCadastro.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void setMenuDeCadastro(JFrame MenuDeCadastro) {
+        this.MenuDeCadastro = MenuDeCadastro;
+    }
+
+    public JTextField getFieldNome() {
+        return this.fieldNome;
+    }
+
+    public void setFieldNome(JTextField fieldNome) {
+        this.fieldNome = fieldNome;
+    }
+
+    public JTextField getFieldCPF() {
+        return this.fieldCPF;
+    }
+
+    public void setFieldCPF(JTextField fieldCPF) {
+        this.fieldCPF = fieldCPF;
+    }
+
+    public JTextField getFieldTelefone() {
+        return this.fieldTelefone;
+    }
+
+    public void setFieldTelefone(JTextField fieldTelefone) {
+        this.fieldTelefone = fieldTelefone;
+    }
+
+    public JTextField getFieldEmail() {
+        return this.fieldEmail;
+    }
+
+    public void setFieldEmail(JTextField fieldEmail) {
+        this.fieldEmail = fieldEmail;
+    }
+
+    public JTextField getFieldEndereco() {
+        return this.fieldEndereco;
+    }
+
+    public void setFieldEndereco(JTextField fieldEndereco) {
+        this.fieldEndereco = fieldEndereco;
+    }
+
+    public JTextField getFieldDataNascimento() {
+        return this.fieldDataNascimento;
+    }
+
+    public void setFieldDataNascimento(JTextField fieldDataNascimento) {
+        this.fieldDataNascimento = fieldDataNascimento;
+    }
+
+    public JTextField getFieldAltura() {
+        return this.fieldAltura;
+    }
+
+    public void setFieldAltura(JTextField fieldAltura) {
+        this.fieldAltura = fieldAltura;
+    }
+
+    public JTextField getFieldPeso() {
+        return this.fieldPeso;
+    }
+
+    public void setFieldPeso(JTextField fieldPeso) {
+        this.fieldPeso = fieldPeso;
+    }
+
+    public JTextField getFieldNomeMedico() {
+        return this.fieldNomeMedico;
+    }
+
+    public void setFieldNomeMedico(JTextField fieldNomeMedico) {
+        this.fieldNomeMedico = fieldNomeMedico;
+    }
+
+    public JTextField getFieldCPFMedico() {
+        return this.fieldCPFMedico;
+    }
+
+    public void setFieldCPFMedico(JTextField fieldCPFMedico) {
+        this.fieldCPFMedico = fieldCPFMedico;
+    }
+
+    public JTextField getFieldTelefoneMedico() {
+        return this.fieldTelefoneMedico;
+    }
+
+    public void setFieldTelefoneMedico(JTextField fieldTelefoneMedico) {
+        this.fieldTelefoneMedico = fieldTelefoneMedico;
+    }
+
+    public JTextField getFieldEmailMedico() {
+        return this.fieldEmailMedico;
+    }
+
+    public void setFieldEmailMedico(JTextField fieldEmailMedico) {
+        this.fieldEmailMedico = fieldEmailMedico;
+    }
+
+    public JTextField getFieldEnderecoMedico() {
+        return this.fieldEnderecoMedico;
+    }
+
+    public void setFieldEnderecoMedico(JTextField fieldEnderecoMedico) {
+        this.fieldEnderecoMedico = fieldEnderecoMedico;
+    }
+
+    public JTextField getFieldDataNascimentoMedico() {
+        return this.fieldDataNascimentoMedico;
+    }
+
+    public void setFieldDataNascimentoMedico(JTextField fieldDataNascimentoMedico) {
+        this.fieldDataNascimentoMedico = fieldDataNascimentoMedico;
+    }
+
+    public JTextField getFieldAreaAtuacaoMedico() {
+        return this.fieldAreaAtuacaoMedico;
+    }
+
+    public void setFieldAreaAtuacaoMedico(JTextField fieldAreaAtuacaoMedico) {
+        this.fieldAreaAtuacaoMedico = fieldAreaAtuacaoMedico;
+    }
+
+    public JTextField getFieldCRMMedico() {
+        return this.fieldCRMMedico;
+    }
+
+    public void setFieldCRMMedico(JTextField fieldCRMMedico) {
+        this.fieldCRMMedico = fieldCRMMedico;
+    }
+
+    public JTextField getFieldNomeHospital() {
+        return this.fieldNomeHospital;
+    }
+
+    public void setFieldNomeHospital(JTextField fieldNomeHospital) {
+        this.fieldNomeHospital = fieldNomeHospital;
+    }
+
 }

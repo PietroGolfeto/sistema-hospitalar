@@ -370,10 +370,14 @@ public class ArquivosOperacao implements Arquivos<Object> {
                                             if (dadosConvenio[0].equals(codigoConvenioPaciente)) {
                                                 int codigoConvenio = Integer.parseInt(dadosConvenio[0]);
                                                 Convenio convenio = new Convenio(codigoConvenio, dadosConvenio[1],
-                                                        LocalDate.parse(dadosConvenio[2]), Double.parseDouble(dadosConvenio[3]));
+                                                        LocalDate.parse(dadosConvenio[2]),
+                                                        Double.parseDouble(dadosConvenio[3]));
                                                 Paciente paciente = new Paciente(dadosPaciente[0], dadosPaciente[1],
                                                         dadosPaciente[2], dadosPaciente[3], dadosPaciente[4],
-                                                        LocalDate.parse(dadosPaciente[5]), dadosPaciente[6], Double.parseDouble(dadosPaciente[7]), Double.parseDouble(dadosPaciente[8]), dadosPaciente[9], convenio);
+                                                        LocalDate.parse(dadosPaciente[5]), dadosPaciente[6],
+                                                        Double.parseDouble(dadosPaciente[7]),
+                                                        Double.parseDouble(dadosPaciente[8]), dadosPaciente[9],
+                                                        convenio);
                                                 hospital.getListaPacientes().add(paciente);
                                                 pacienteEncontrado = true;
                                                 break;
@@ -405,7 +409,8 @@ public class ArquivosOperacao implements Arquivos<Object> {
                                 String dadosConsulta[] = linhaConsulta.split(",");
 
                                 if (dadosConsulta[0].equals(idConsulta)) {
-                                    // Consulta tem parametros: Paciente paciente, Medico medicoAtendimento, LocalDate data
+                                    // Consulta tem parametros: Paciente paciente, Medico medicoAtendimento,
+                                    // LocalDate data
                                     // Paciente e Medico serão inicializados com null e instanciados posteriormente
                                     String cpfPaciente = dadosConsulta[1];
                                     Paciente pacienteConsulta = null;
@@ -428,24 +433,35 @@ public class ArquivosOperacao implements Arquivos<Object> {
                                             if (dadosPaciente[0].equals(cpfPaciente)) {
                                                 // Lê convenio do paciente e instancia na listaConvenios
                                                 String caminhoConvenio = "arquivosCSV/Convenio.csv";
-                                                File fileConvenio = new File(new File(".").getCanonicalFile(), caminhoConvenio);
+                                                File fileConvenio = new File(new File(".").getCanonicalFile(),
+                                                        caminhoConvenio);
                                                 String codigoConvenioPaciente = dadosPaciente[10];
 
-                                                try (BufferedReader brConvenio = new BufferedReader(new FileReader(fileConvenio))) {
+                                                try (BufferedReader brConvenio = new BufferedReader(
+                                                        new FileReader(fileConvenio))) {
                                                     // Ignora cabeçalho do arquivo CSV
                                                     String linhaConvenio = brConvenio.readLine();
                                                     Boolean convenioEncontrado = false;
-                                                    while ((linhaConvenio = brConvenio.readLine()) != null && !convenioEncontrado) {
+                                                    while ((linhaConvenio = brConvenio.readLine()) != null
+                                                            && !convenioEncontrado) {
                                                         String[] dadosConvenio = linhaConvenio.split(",");
 
                                                         if (dadosConvenio[0].equals(codigoConvenioPaciente)) {
                                                             int codigoConvenio = Integer.parseInt(dadosConvenio[0]);
-                                                            Convenio convenio = new Convenio(codigoConvenio, dadosConvenio[1],
-                                                                    LocalDate.parse(dadosConvenio[2]), Double.parseDouble(dadosConvenio[3]));
-                                                            pacienteConsulta = new Paciente(dadosPaciente[0], dadosPaciente[1],
-                                                                    dadosPaciente[2], dadosPaciente[3], dadosPaciente[4],
-                                                                    LocalDate.parse(dadosPaciente[5]), dadosPaciente[6], Double.parseDouble(dadosPaciente[7]), Double.parseDouble(dadosPaciente[8]), dadosPaciente[9], convenio);
-                                                            // Paciente já foi adicionado na listaPacientes anteriormente
+                                                            Convenio convenio = new Convenio(codigoConvenio,
+                                                                    dadosConvenio[1],
+                                                                    LocalDate.parse(dadosConvenio[2]),
+                                                                    Double.parseDouble(dadosConvenio[3]));
+                                                            pacienteConsulta = new Paciente(dadosPaciente[0],
+                                                                    dadosPaciente[1],
+                                                                    dadosPaciente[2], dadosPaciente[3],
+                                                                    dadosPaciente[4],
+                                                                    LocalDate.parse(dadosPaciente[5]), dadosPaciente[6],
+                                                                    Double.parseDouble(dadosPaciente[7]),
+                                                                    Double.parseDouble(dadosPaciente[8]),
+                                                                    dadosPaciente[9], convenio);
+                                                            // Paciente já foi adicionado na listaPacientes
+                                                            // anteriormente
                                                             pacienteEncontrado = true;
                                                             convenioEncontrado = true;
                                                             break;
@@ -472,7 +488,8 @@ public class ArquivosOperacao implements Arquivos<Object> {
                                         while ((linhaMedico = brMedico.readLine()) != null && !medicoEncontrado) {
                                             String[] dadosMedico = linhaMedico.split(",");
                                             if (dadosMedico[0].equals(cpfMedico)) {
-                                                medicoConsulta = new Medico(dadosMedico[0], dadosMedico[1], dadosMedico[2],
+                                                medicoConsulta = new Medico(dadosMedico[0], dadosMedico[1],
+                                                        dadosMedico[2],
                                                         dadosMedico[3], dadosMedico[4], LocalDate.parse(dadosMedico[5]),
                                                         dadosMedico[6], dadosMedico[7], dadosMedico[8]);
                                                 // Medico já foi adicionado na listaMedicos anteriormente
@@ -486,6 +503,106 @@ public class ArquivosOperacao implements Arquivos<Object> {
 
                                     // Instancia consulta e adiciona na listaConsultas
                                     Consulta consulta = new Consulta(pacienteConsulta, medicoConsulta, data);
+
+                                    // Inicializa diagnóstico da consulta
+                                    String doenca = dadosConsulta[4];
+                                    String cpfMedicoProcedimento = dadosConsulta[5];
+                                    LocalDate dataProcedimento = LocalDate.parse(dadosConsulta[6]);
+
+                                    // Procura Medico com esse cpf em Medico.cpf e o instancia
+                                    String caminhoMedicoProcedimento = "arquivosCSV/Medico.csv";
+                                    File fileMedicoProcedimento = new File(new File(".").getCanonicalFile(),
+                                            caminhoMedicoProcedimento);
+                                    Medico medicoProcedimento = null;
+
+                                    try (BufferedReader brMedicoProcedimento = new BufferedReader(
+                                            new FileReader(fileMedicoProcedimento))) {
+                                        // Ignora cabeçalho do arquivo CSV
+                                        String linhaMedicoProcedimento = brMedicoProcedimento.readLine();
+                                        Boolean medicoProcedimentoEncontrado = false;
+
+                                        while ((linhaMedicoProcedimento = brMedicoProcedimento.readLine()) != null
+                                                && !medicoProcedimentoEncontrado) {
+                                            String[] dadosMedicoProcedimento = linhaMedicoProcedimento.split(",");
+                                            if (dadosMedicoProcedimento[0].equals(cpfMedicoProcedimento)) {
+
+                                                medicoProcedimento = new Medico(dadosMedicoProcedimento[0],
+                                                        dadosMedicoProcedimento[1], dadosMedicoProcedimento[2],
+                                                        dadosMedicoProcedimento[3], dadosMedicoProcedimento[4],
+                                                        LocalDate.parse(dadosMedicoProcedimento[5]),
+                                                        dadosMedicoProcedimento[6], dadosMedicoProcedimento[7],
+                                                        dadosMedicoProcedimento[8]);
+                                                // Medico já foi adicionado na listaMedicos anteriormente
+                                                medicoProcedimentoEncontrado = true;
+                                                break;
+                                            }
+                                        }
+                                    } catch (IOException e) {
+                                        System.err.println(e.getMessage());
+                                    }
+
+                                    int idConsultaInteger = Integer.parseInt(idConsulta);
+                                    Diagnostico diagnostico = new Diagnostico(doenca, medicoProcedimento,
+                                            idConsultaInteger);
+                                    consulta.setDiagnostico(diagnostico);
+
+                                    // Instancia diagnóstico da consulta procurando pelo id da consulta em Exame.csv
+                                    // ou Cirurgia.csv
+                                    int exame1Consulta2 = 0;
+                                    String caminhoExame = "arquivosCSV/Exame.csv";
+                                    File fileExame = new File(new File(".").getCanonicalFile(), caminhoExame);
+                                    Exame exame;
+                                    Cirurgia cirurgia;
+
+                                    try (BufferedReader brExame = new BufferedReader(new FileReader(fileExame))) {
+                                        // Ignora cabeçalho do arquivo CSV
+                                        String linhaExame = brExame.readLine();
+
+                                        while ((linhaExame = brExame.readLine()) != null) {
+                                            String[] dadosExame = linhaExame.split(",");
+                                            if (dadosExame[5].equals(idConsulta)) {
+                                                String nomeExame = dadosExame[0];
+                                                String salaExame = dadosExame[1];
+                                                String laudoExame = dadosExame[4];
+                                                exame = new Exame(nomeExame, salaExame, medicoProcedimento,
+                                                        dataProcedimento, laudoExame, idConsultaInteger);
+                                                exame1Consulta2 = 1;
+                                                diagnostico.setProcedimento(exame);
+                                                break;
+                                            }
+                                        }
+                                    } catch (IOException e) {
+                                        System.err.println(e.getMessage());
+                                    }
+
+                                    // Não encontrou exame, procura cirurgia
+                                    if (exame1Consulta2 == 0) {
+                                        String caminhoCirurgia = "arquivosCSV/Cirurgia.csv";
+                                        File fileCirurgia = new File(new File(".").getCanonicalFile(), caminhoCirurgia);
+
+                                        try (BufferedReader brCirurgia = new BufferedReader(
+                                                new FileReader(fileCirurgia))) {
+                                            // Ignora cabeçalho do arquivo CSV
+                                            String linhaCirurgia = brCirurgia.readLine();
+
+                                            while ((linhaCirurgia = brCirurgia.readLine()) != null) {
+                                                String[] dadosCirurgia = linhaCirurgia.split(",");
+                                                if (dadosCirurgia[5].equals(idConsulta)) {
+                                                    String nomeCirurgia = dadosCirurgia[0];
+                                                    String salaCirurgia = dadosCirurgia[1];
+                                                    String tipoCirurgia = dadosCirurgia[4];
+                                                    cirurgia = new Cirurgia(nomeCirurgia, salaCirurgia,
+                                                            medicoProcedimento, dataProcedimento, tipoCirurgia,
+                                                            idConsultaInteger);
+                                                    diagnostico.setProcedimento(cirurgia);
+                                                    break;
+                                                }
+                                            }
+                                        } catch (IOException e) {
+                                            System.err.println(e.getMessage());
+                                        }
+                                    }
+
                                     hospital.getListaConsultas().add(consulta);
                                     break;
                                 }
