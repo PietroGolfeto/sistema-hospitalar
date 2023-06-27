@@ -6,9 +6,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ArquivosOperacao implements Arquivos<Object> {
+    protected static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
     @Override
     public ArrayList<String> ler(Object objeto) {
         System.out.println("Lendo arquivo: ");
@@ -325,7 +328,7 @@ public class ArquivosOperacao implements Arquivos<Object> {
 
                                 if (dadosMedico[0].equals(cpf)) {
                                     Medico medico = new Medico(dadosMedico[0], dadosMedico[1], dadosMedico[2],
-                                            dadosMedico[3], dadosMedico[4], LocalDate.parse(dadosMedico[5]),
+                                            dadosMedico[3], dadosMedico[4], LocalDate.parse(dadosMedico[5], formatter),
                                             dadosMedico[6], dadosMedico[7], dadosMedico[8]);
                                     hospital.getListaMedicos().add(medico);
                                     break;
@@ -370,11 +373,11 @@ public class ArquivosOperacao implements Arquivos<Object> {
                                             if (dadosConvenio[0].equals(codigoConvenioPaciente)) {
                                                 int codigoConvenio = Integer.parseInt(dadosConvenio[0]);
                                                 Convenio convenio = new Convenio(codigoConvenio, dadosConvenio[1],
-                                                        LocalDate.parse(dadosConvenio[2]),
+                                                        LocalDate.parse(dadosConvenio[2], formatter),
                                                         Double.parseDouble(dadosConvenio[3]));
                                                 Paciente paciente = new Paciente(dadosPaciente[0], dadosPaciente[1],
                                                         dadosPaciente[2], dadosPaciente[3], dadosPaciente[4],
-                                                        LocalDate.parse(dadosPaciente[5]), dadosPaciente[6],
+                                                        LocalDate.parse(dadosPaciente[5], formatter), dadosPaciente[6],
                                                         Double.parseDouble(dadosPaciente[7]),
                                                         Double.parseDouble(dadosPaciente[8]), dadosPaciente[9],
                                                         convenio);
@@ -417,7 +420,7 @@ public class ArquivosOperacao implements Arquivos<Object> {
 
                                     String cpfMedico = dadosConsulta[2];
                                     Medico medicoConsulta = null;
-                                    LocalDate data = LocalDate.parse(dadosConsulta[3]);
+                                    LocalDate data = LocalDate.parse(dadosConsulta[3], formatter);
 
                                     // Procura Paciente com esse cpf em Paciente.cpf e o instancia
                                     String caminhoPaciente = "arquivosCSV/Paciente.csv";
@@ -450,13 +453,14 @@ public class ArquivosOperacao implements Arquivos<Object> {
                                                             int codigoConvenio = Integer.parseInt(dadosConvenio[0]);
                                                             Convenio convenio = new Convenio(codigoConvenio,
                                                                     dadosConvenio[1],
-                                                                    LocalDate.parse(dadosConvenio[2]),
+                                                                    LocalDate.parse(dadosConvenio[2], formatter),
                                                                     Double.parseDouble(dadosConvenio[3]));
                                                             pacienteConsulta = new Paciente(dadosPaciente[0],
                                                                     dadosPaciente[1],
                                                                     dadosPaciente[2], dadosPaciente[3],
                                                                     dadosPaciente[4],
-                                                                    LocalDate.parse(dadosPaciente[5]), dadosPaciente[6],
+                                                                    LocalDate.parse(dadosPaciente[5], formatter),
+                                                                    dadosPaciente[6],
                                                                     Double.parseDouble(dadosPaciente[7]),
                                                                     Double.parseDouble(dadosPaciente[8]),
                                                                     dadosPaciente[9], convenio);
@@ -490,7 +494,8 @@ public class ArquivosOperacao implements Arquivos<Object> {
                                             if (dadosMedico[0].equals(cpfMedico)) {
                                                 medicoConsulta = new Medico(dadosMedico[0], dadosMedico[1],
                                                         dadosMedico[2],
-                                                        dadosMedico[3], dadosMedico[4], LocalDate.parse(dadosMedico[5]),
+                                                        dadosMedico[3], dadosMedico[4],
+                                                        LocalDate.parse(dadosMedico[5], formatter),
                                                         dadosMedico[6], dadosMedico[7], dadosMedico[8]);
                                                 // Medico já foi adicionado na listaMedicos anteriormente
                                                 medicoEncontrado = true;
@@ -507,7 +512,7 @@ public class ArquivosOperacao implements Arquivos<Object> {
                                     // Inicializa diagnóstico da consulta
                                     String doenca = dadosConsulta[4];
                                     String cpfMedicoProcedimento = dadosConsulta[5];
-                                    LocalDate dataProcedimento = LocalDate.parse(dadosConsulta[6]);
+                                    LocalDate dataProcedimento = LocalDate.parse(dadosConsulta[6], formatter);
 
                                     // Procura Medico com esse cpf em Medico.cpf e o instancia
                                     String caminhoMedicoProcedimento = "arquivosCSV/Medico.csv";
@@ -529,7 +534,7 @@ public class ArquivosOperacao implements Arquivos<Object> {
                                                 medicoProcedimento = new Medico(dadosMedicoProcedimento[0],
                                                         dadosMedicoProcedimento[1], dadosMedicoProcedimento[2],
                                                         dadosMedicoProcedimento[3], dadosMedicoProcedimento[4],
-                                                        LocalDate.parse(dadosMedicoProcedimento[5]),
+                                                        LocalDate.parse(dadosMedicoProcedimento[5], formatter),
                                                         dadosMedicoProcedimento[6], dadosMedicoProcedimento[7],
                                                         dadosMedicoProcedimento[8]);
                                                 // Medico já foi adicionado na listaMedicos anteriormente

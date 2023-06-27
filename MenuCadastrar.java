@@ -17,7 +17,7 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class MenuCadastrar {
+public class MenuCadastrar extends JFrame {
 
     private JFrame MenuDeCadastro;
     private JTextField fieldNome;
@@ -42,15 +42,13 @@ public class MenuCadastrar {
         ArquivosOperacao admin = new ArquivosOperacao();
 
         System.out.println("Chamou menu cadastrar");
-        MenuDeCadastro = new JFrame();
-        MenuDeCadastro.setTitle("Menu de Cadastro");
-        MenuDeCadastro.setBounds(100, 100, 966, 561);
-        MenuDeCadastro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        MenuDeCadastro.getContentPane().setLayout(null);
+        setTitle("Menu de Cadastro");
+        setBounds(100, 100, 966, 561);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         tabbedPane.setBounds(10, 10, 932, 504);
-        MenuDeCadastro.getContentPane().add(tabbedPane);
 
         JPanel panel = new JPanel();
         tabbedPane.addTab("Paciente", null, panel, null);
@@ -415,6 +413,13 @@ public class MenuCadastrar {
         });
         btnCadastrarMedico_1.setBounds(765, 414, 141, 53);
         panel_2.add(btnCadastrarMedico_1);
+        tabbedPane.add(panel);
+        tabbedPane.add(panel_1);
+        tabbedPane.add(panel_2);
+        add(tabbedPane);
+        setSize(970, 560);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     public static void getMenuDeCadastro() {
@@ -422,7 +427,7 @@ public class MenuCadastrar {
             public void run() {
                 try {
                     MenuCadastrar window = new MenuCadastrar();
-                    window.MenuDeCadastro.setVisible(true);
+                    window.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

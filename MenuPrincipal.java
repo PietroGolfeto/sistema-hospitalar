@@ -17,7 +17,7 @@ public class MenuPrincipal extends JFrame {
     public MenuPrincipal() {
         setTitle("Sistema de gerenciamento hospitalar");
 
-        // Cria o paine
+        // Cria o painel
         JPanel painel = new JPanel();
         areaTexto = new JTextArea(40, 100);
         JScrollPane scroll = new JScrollPane(areaTexto);
@@ -66,8 +66,6 @@ public class MenuPrincipal extends JFrame {
         });
 
         painel.add(botaoListar);
-        // TO DO
-        // Coloquei o botão cadastrar aqui para testar, mas quebra quando clico
         painel.add(botaoCadastrar);
         painel.add(botaoSair);
 
