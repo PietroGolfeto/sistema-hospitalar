@@ -25,7 +25,6 @@ public class Hospital {
         }
         this.id = id;
 
-
         this.listaMedicos = new ArrayList<Medico>();
         this.listaPacientes = new ArrayList<Paciente>();
         this.listaConsultas = new ArrayList<Consulta>();

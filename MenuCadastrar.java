@@ -15,9 +15,12 @@ import java.awt.Color;
 import javax.swing.JSeparator;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
+import java.time.format.DateTimeFormatter;
 import java.awt.event.ActionEvent;
+import java.time.LocalDate;
 
 public class MenuCadastrar extends JFrame {
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private JTextField fieldNome;
     private JTextField fieldCPF;
@@ -44,6 +47,7 @@ public class MenuCadastrar extends JFrame {
     private JComboBox<String> boxTipoHospital;
 
     public MenuCadastrar() {
+        ArquivosOperacao admin = new ArquivosOperacao();
         System.out.println("Chamou menu cadastrar");
         setTitle("Menu de Cadastro");
         setBounds(100, 100, 966, 561);
@@ -130,6 +134,13 @@ public class MenuCadastrar extends JFrame {
         JButton btnCadastrar = new JButton("Cadastrar");
         btnCadastrar.setBounds(765, 414, 141, 53);
         panel.add(btnCadastrar);
+        // String endereco, String email, LocalDate dataNascimento,
+        //   String genero, double altura, double peso, String tipoSanguinio, Convenio convenio)
+    
+        btnCadastrar.addActionListener(e -> {
+            Paciente newPaciente = new Paciente(fieldCPF.getText(), fieldNome.getText(), fieldTelefone.getText(), fieldEndereco.getText(), fieldEmail.getText(), LocalDate.parse(fieldDataNascimento.getText(), formatter), boxGenero.getSelectedItem().toString(), Double.parseDouble(fieldAltura.getText()), Double.parseDouble(fieldPeso.getText()), boxTipoSanguinio.getSelectedItem().toString(), new Convenio());
+            admin.escrever(newPaciente);
+        });
 
         Box verticalBox = Box.createVerticalBox();
         verticalBox.setBounds(461, 79, -8, -37);
@@ -414,10 +425,7 @@ public class MenuCadastrar extends JFrame {
         });
         btnCadastrarMedico_1.setBounds(765, 414, 141, 53);
         panel_2.add(btnCadastrarMedico_1);
-        tabbedPane.add(panel);
-        tabbedPane.add(panel_1);
-        tabbedPane.add(panel_2);
-        add(tabbedPane);
+        getContentPane().add(tabbedPane);
         setSize(970, 560);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

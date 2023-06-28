@@ -199,8 +199,8 @@ public class ArquivosOperacao implements Arquivos<Object> {
                             + "," + paciente.getGenero() + "," + paciente.getProntuario().getAltura() + ","
                             + paciente.getProntuario().getPeso() + "," + paciente.getProntuario().getTipoSanguinio());
 
-                    writer.write(sb.toString());
                     writer.newLine();
+                    writer.write(sb.toString());
                     break;
 
                 case "Medico":
@@ -214,8 +214,8 @@ public class ArquivosOperacao implements Arquivos<Object> {
                         sb.append(medico.getListaConsultas().get(i).getPaciente() + ",");
                     }
 
-                    writer.write(sb.toString());
                     writer.newLine();
+                    writer.write(sb.toString());
                     break;
 
                 case "Consulta":
@@ -227,8 +227,9 @@ public class ArquivosOperacao implements Arquivos<Object> {
                             + consulta.getDiagnostico().getProcedimento().getMedicoProcedimento().getCpf() + ","
                             + consulta.getDiagnostico().getProcedimento().getData().toString() + ","
                             + consulta.getValor());
-                    writer.write(sb.toString());
+                    
                     writer.newLine();
+                    writer.write(sb.toString());
                     break;
 
                 case "Convenio":
@@ -236,8 +237,9 @@ public class ArquivosOperacao implements Arquivos<Object> {
                     Convenio convenio = (Convenio) objeto;
                     sb.append(convenio.getCodigo() + "," + convenio.getNome() + "," + convenio.getDataValidade()
                             + "," + convenio.getMultiplicadorDesconto());
-                    writer.write(sb.toString());
+
                     writer.newLine();
+                    writer.write(sb.toString());
                     break;
 
                 case "Hospital":
@@ -254,8 +256,9 @@ public class ArquivosOperacao implements Arquivos<Object> {
                     for (int i = 0; i < hospital.getListaConsultas().size(); i++) {
                         sb.append(hospital.getListaConsultas().get(i).getId() + ",");
                     }
-                    writer.write(sb.toString());
+
                     writer.newLine();
+                    writer.write(sb.toString());
                     break;
 
                 case "Exame":
@@ -264,6 +267,9 @@ public class ArquivosOperacao implements Arquivos<Object> {
                     sb.append(exame.getNome() + "," + exame.getSala() + ","
                             + exame.getMedicoProcedimento().getCpf() + "," + exame.getData().toString() + ","
                             + exame.getLaudo() + "," + exame.getIdConsulta());
+
+                    writer.newLine();
+                    writer.write(sb.toString());
                     break;
 
                 case "Cirurgia":
@@ -272,6 +278,9 @@ public class ArquivosOperacao implements Arquivos<Object> {
                     sb.append(cirurgia.getNome() + "," + cirurgia.getSala() + ","
                             + cirurgia.getMedicoProcedimento().getCpf() + "," + cirurgia.getData().toString() + ","
                             + cirurgia.getTipoCirurgia() + "," + cirurgia.getIdConsulta());
+
+                    writer.newLine();
+                    writer.write(sb.toString());
                     break;
 
                 default:
