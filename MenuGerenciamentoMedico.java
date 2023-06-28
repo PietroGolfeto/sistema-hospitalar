@@ -18,45 +18,24 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 
-public class MenuGerenciamentoMedico {
+public class MenuGerenciamentoMedico extends JFrame{
+    ArquivosOperacao admin = new ArquivosOperacao();
+    ArrayList<Hospital> listaHospitais = ArquivosOperacao.lerArquivoHospital();
+    // Pega todas as consultas do primeiro hospital
+    ArrayList<Consulta> consultas = listaHospitais.get(0).getListaConsultas();
 
-    private JFrame frmMenuDeGerenciamento;
-    ArrayList<String> consultas = new ArrayList<>();
     private JTextField textField;
     private JTextField textField_1;
 
-    /**
-     * Create the application.
-     */
     public MenuGerenciamentoMedico() {
-        consultas.add("Consulta 1");
-        consultas.add("Consulta 2");
-        consultas.add("Consulta 3");
-        initialize();
-    }
-
-    /**
-     * try {
-     * MenuGerenciamentoMedico window = new MenuGerenciamentoMedico();
-     * window.frmMenuDeGerenciamento.setVisible(true);
-     * } catch (Exception e) {
-     * e.printStackTrace();
-     * }
-     */
-
-    /**
-     * Initialize the contents of the frame.
-     */
-    private void initialize() {
-        frmMenuDeGerenciamento = new JFrame();
-        frmMenuDeGerenciamento.setTitle("Menu de Gerenciamento - Medico");
-        frmMenuDeGerenciamento.setBounds(100, 100, 945, 568);
-        frmMenuDeGerenciamento.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frmMenuDeGerenciamento.getContentPane().setLayout(null);
+        setTitle("Menu de Gerenciamento - Medico");
+        setBounds(100, 100, 945, 568);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         JPanel panel = new JPanel();
         panel.setBounds(10, 11, 911, 511);
-        frmMenuDeGerenciamento.getContentPane().add(panel);
+        getContentPane().add(panel);
         panel.setLayout(null);
 
         JLabel lblNewLabel = new JLabel("MEDICO X");
@@ -120,7 +99,7 @@ public class MenuGerenciamentoMedico {
         lblMedicoProcedimento.setBounds(493, 131, 165, 26);
         panel_1.add(lblMedicoProcedimento);
 
-        JComboBox boxMedicoAtendente_1 = new JComboBox(new Object[] {});
+        JComboBox<String> boxMedicoAtendente_1 = new JComboBox<>();
         boxMedicoAtendente_1.setBounds(669, 136, 121, 21);
         panel_1.add(boxMedicoAtendente_1);
 
@@ -161,11 +140,11 @@ public class MenuGerenciamentoMedico {
         lblMedicoAtendente.setBounds(313, 108, 165, 26);
         panel_2.add(lblMedicoAtendente);
 
-        JComboBox boxMedicoAtendente = new JComboBox(new Object[] {});
+        JComboBox<String> boxMedicoAtendente = new JComboBox<>();
         boxMedicoAtendente.setBounds(489, 113, 121, 21);
         panel_2.add(boxMedicoAtendente);
 
-        JComboBox boxPaciente = new JComboBox(new Object[] {});
+        JComboBox<String> boxPaciente = new JComboBox<>();
         boxPaciente.setBounds(123, 113, 121, 21);
         panel_2.add(boxPaciente);
 
@@ -181,11 +160,22 @@ public class MenuGerenciamentoMedico {
         panel_2.add(lblNewLabel_2);
         final DefaultListModel<String> model = new DefaultListModel<>();
         for (int i = 0; i < consultas.size(); i++) {
-            model.addElement(consultas.get(i));
+            String idConsulta = Integer.toString(consultas.get(i).getId());
+            String nomeMedico = consultas.get(i).getMedicoAtendimento().getNome();
+            model.addElement(idConsulta + " - " + nomeMedico);
         }
+    }
 
-        String[] listaPacientes = { "...", "Paciente A", "Paciente B", "Paciente C" };
-
-        String[] listaMedicos = { "...", "Medico A", "Medico B", "Medico C" };
+    public static void getMenuGerenciamentoMedico() {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    MenuGerenciamentoMedico window = new MenuGerenciamentoMedico();
+                    window.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

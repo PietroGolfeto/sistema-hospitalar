@@ -10,51 +10,28 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JTextArea;
 import javax.swing.JList;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
-public class MenuLogin {
+public class MenuLogin extends JFrame{
 
-    private JFrame frmLogn;
-    private JTextField fieldNomePaciente;
+    private JTextField fieldCPFPaciente;
     private JTextField fieldHospitalMedico;
-    ArrayList<String> hospital = new ArrayList<>();
+    ArrayList<Hospital> hospital = ArquivosOperacao.lerArquivoHospital();
 
-    /**
-     * try {
-     * login window = new login();
-     * window.frmLogn.setVisible(true);
-     * } catch (Exception e) {
-     * e.printStackTrace();
-     * }
-     */
+    // Inicializa o menu de login
+    public MenuLogin(){
 
-    /**
-     * Create the application.
-     */
-    public MenuLogin() {
-        hospital.add("...");
-        hospital.add("Albert Einstein");
-        hospital.add("HC");
-        initialize();
-    }
-
-    /**
-     * Initialize the contents of the frame.
-     */
-    private void initialize() {
-        frmLogn = new JFrame();
-        frmLogn.setTitle("Menu de Login");
-        frmLogn.setBounds(100, 100, 987, 605);
-        frmLogn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frmLogn.getContentPane().setLayout(null);
+        setTitle("Menu de Login");
+        setBounds(100, 100, 987, 605);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         tabbedPane.setBounds(10, 37, 953, 521);
-        frmLogn.getContentPane().add(tabbedPane);
+        getContentPane().add(tabbedPane);
 
         JPanel panel = new JPanel();
         tabbedPane.addTab("Login Paciente", null, panel, null);
@@ -65,9 +42,9 @@ public class MenuLogin {
         lblHospital.setBounds(10, 130, 260, 29);
         panel.add(lblHospital);
 
-        JComboBox boxHospitalPaciente = new JComboBox();
+        JComboBox<String> boxHospitalPaciente = new JComboBox<>();
         for (int i = 0; i < hospital.size(); i++) {
-            boxHospitalPaciente.addItem(hospital.get(i));
+            boxHospitalPaciente.addItem(hospital.get(i).getNome());
         }
         boxHospitalPaciente.setBounds(221, 136, 144, 21);
         panel.add(boxHospitalPaciente);
@@ -78,17 +55,17 @@ public class MenuLogin {
         lblNewLabel.setBounds(0, 0, 948, 40);
         panel.add(lblNewLabel);
 
-        JLabel lblNome = new JLabel("Digite o Nome do Paciente:");
-        lblNome.setFont(new Font("Tahoma", Font.PLAIN, 19));
-        lblNome.setBounds(10, 191, 260, 34);
-        panel.add(lblNome);
+        JLabel lblCPFPaciente = new JLabel("Digite o CPF do Paciente:");
+        lblCPFPaciente.setFont(new Font("Tahoma", Font.PLAIN, 19));
+        lblCPFPaciente.setBounds(10, 191, 260, 34);
+        panel.add(lblCPFPaciente);
 
-        fieldNomePaciente = new JTextField();
-        fieldNomePaciente.setBounds(269, 203, 232, 19);
-        panel.add(fieldNomePaciente);
-        fieldNomePaciente.setColumns(10);
+        fieldCPFPaciente = new JTextField();
+        fieldCPFPaciente.setBounds(269, 203, 232, 19);
+        panel.add(fieldCPFPaciente);
+        fieldCPFPaciente.setColumns(10);
 
-        JList<String> listaErrosPaciente = new JList();
+        JList<String> listaErrosPaciente = new JList<>();
         final DefaultListModel<String> modelPaciente = new DefaultListModel<>();
 
         listaErrosPaciente.setBounds(697, 398, 241, 86);
@@ -114,9 +91,9 @@ public class MenuLogin {
         lblLoginMedico.setBounds(0, 0, 948, 40);
         panel_1.add(lblLoginMedico);
 
-        JComboBox boxHospitalMedico = new JComboBox();
+        JComboBox<String> boxHospitalMedico = new JComboBox<>();
         for (int i = 0; i < hospital.size(); i++) {
-            boxHospitalMedico.addItem(hospital.get(i));
+            boxHospitalMedico.addItem(hospital.get(i).getNome());
         }
         boxHospitalMedico.setBounds(221, 136, 144, 21);
         panel_1.add(boxHospitalMedico);
@@ -126,17 +103,17 @@ public class MenuLogin {
         lblHospital_1.setBounds(10, 130, 260, 29);
         panel_1.add(lblHospital_1);
 
-        JLabel lblNomeMedico = new JLabel("Digite o Nome do Medico:");
-        lblNomeMedico.setFont(new Font("Tahoma", Font.PLAIN, 19));
-        lblNomeMedico.setBounds(10, 191, 260, 34);
-        panel_1.add(lblNomeMedico);
+        JLabel lblCPFMedico = new JLabel("Digite o CPF do Medico:");
+        lblCPFMedico.setFont(new Font("Tahoma", Font.PLAIN, 19));
+        lblCPFMedico.setBounds(10, 191, 260, 34);
+        panel_1.add(lblCPFMedico);
 
         fieldHospitalMedico = new JTextField();
         fieldHospitalMedico.setColumns(10);
-        fieldHospitalMedico.setBounds(269, 203, 232, 19);
+        fieldHospitalMedico.setBounds(249, 203, 232, 19);
         panel_1.add(fieldHospitalMedico);
 
-        JList listaErrosMedico = new JList();
+        JList<String> listaErrosMedico = new JList<>();
         final DefaultListModel<String> modelMedico = new DefaultListModel<>();
         listaErrosMedico.setBounds(697, 398, 241, 86);
         panel_1.add(listaErrosMedico);
@@ -145,11 +122,24 @@ public class MenuLogin {
         JButton btnMedico = new JButton("Login");
         btnMedico.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                modelMedico.addElement("Medico nao encontrado!");
+                MenuGerenciamentoMedico.getMenuGerenciamentoMedico();
             }
         });
         btnMedico.setBounds(428, 423, 123, 40);
         panel_1.add(btnMedico);
 
+    }
+
+    public static void getMenuLogin() {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    MenuLogin window = new MenuLogin();
+                    window.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

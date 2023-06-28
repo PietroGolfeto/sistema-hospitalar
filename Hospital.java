@@ -12,12 +12,19 @@ public class Hospital {
     String nome;
     double receita;
 
-    // Hospital sem id, gera aleatório
+    // Hospital sem id, gera id aleatório e único
     public Hospital(String tipo, String nome, String cnpj) {
-        // TO DO
-        // Gera id aleatorio, checa se já existe no CSV
+        ArquivosOperacao admin = new ArquivosOperacao();
         Random random = new Random();
-        this.id = random.nextInt(1000);
+        int id = random.nextInt(1000);
+
+        // Gera id aleatorio, checa se já existe no CSV
+        ArrayList<String> listaIdHospital = admin.ler(new Hospital());
+        while (listaIdHospital.contains(Integer.toString(id))) {
+            id = random.nextInt(1000);
+        }
+        this.id = id;
+
 
         this.listaMedicos = new ArrayList<Medico>();
         this.listaPacientes = new ArrayList<Paciente>();
@@ -38,6 +45,18 @@ public class Hospital {
         this.nome = nome;
         this.cnpj = cnpj;
         this.receita = 0.0;
+    }
+
+    // Construtor sem parâmetros para inicializar objeto
+    public Hospital() {
+        this.tipo = "";
+        this.nome = "";
+        this.cnpj = "";
+        this.id = -1;
+        this.receita = 0.0;
+        this.listaMedicos = new ArrayList<Medico>();
+        this.listaPacientes = new ArrayList<Paciente>();
+        this.listaConsultas = new ArrayList<Consulta>();
     }
 
     public void calcularReceita() {

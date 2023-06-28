@@ -21,9 +21,6 @@ public class Diagnostico {
         this.idConsulta = -1;
         this.doenca = "";
         this.medicoAtendimento = new Medico();
-        // TO DO
-        // Não pode instanciar classe abstrata
-        // this.procedimento = new Procedimento();
         this.procedimento = new Exame();
     }
 

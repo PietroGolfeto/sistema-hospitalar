@@ -19,7 +19,6 @@ import java.awt.event.ActionEvent;
 
 public class MenuCadastrar extends JFrame {
 
-    private JFrame MenuDeCadastro;
     private JTextField fieldNome;
     private JTextField fieldCPF;
     private JTextField fieldTelefone;
@@ -37,10 +36,14 @@ public class MenuCadastrar extends JFrame {
     private JTextField fieldAreaAtuacaoMedico;
     private JTextField fieldCRMMedico;
     private JTextField fieldNomeHospital;
+    private JComboBox<String> boxGeneroMedico;
+    private JComboBox<String> boxTipoSanguinio;
+    private JComboBox<String> boxHospital;
+    private JComboBox<String> boxGenero;
+    private JComboBox<String> boxHospitalMedico;
+    private JComboBox<String> boxTipoHospital;
 
     public MenuCadastrar() {
-        ArquivosOperacao admin = new ArquivosOperacao();
-
         System.out.println("Chamou menu cadastrar");
         setTitle("Menu de Cadastro");
         setBounds(100, 100, 966, 561);
@@ -176,7 +179,7 @@ public class MenuCadastrar extends JFrame {
         panel.add(lblProntuario);
 
         String[] tiposSanguinios = { "...", "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-" };
-        final JComboBox boxTipoSanguinio = new JComboBox(tiposSanguinios);
+        boxTipoSanguinio = new JComboBox<>(tiposSanguinios);
         boxTipoSanguinio.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println(boxTipoSanguinio.getSelectedItem());
@@ -185,12 +188,10 @@ public class MenuCadastrar extends JFrame {
         boxTipoSanguinio.setBounds(634, 236, 43, 21);
         panel.add(boxTipoSanguinio);
 
-        // TO DO
-        // Lucas instancia um hospital com nome "..." se precisar
         System.out.println("Chamou menu cadastrar 2");
         ArrayList<Hospital> hospitaisCadastrados = ArquivosOperacao.lerArquivoHospital();
 
-        final JComboBox boxHospital = new JComboBox();
+        boxHospital = new JComboBox<>();
         for (int i = 0; i < hospitaisCadastrados.size(); i++) {
             boxHospital.addItem(hospitaisCadastrados.get(i).getNome());
         }
@@ -210,7 +211,7 @@ public class MenuCadastrar extends JFrame {
         panel.add(lblEscolhaUmHospital);
 
         String[] generosPossiveis = { "...", "Masculino", "Feminino" };
-        final JComboBox boxGenero = new JComboBox(generosPossiveis);
+        boxGenero = new JComboBox<>(generosPossiveis);
         boxGenero.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println(boxGenero.getSelectedItem());
@@ -296,7 +297,7 @@ public class MenuCadastrar extends JFrame {
 
         String[] generosPossiveisMedico = { "...", "Masculino", "Feminino", "LGBTQIA+" };
 
-        final JComboBox boxGeneroMedico = new JComboBox(generosPossiveisMedico);
+        boxGeneroMedico = new JComboBox<>(generosPossiveisMedico);
         boxGeneroMedico.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println(boxGeneroMedico.getSelectedItem());
@@ -315,7 +316,7 @@ public class MenuCadastrar extends JFrame {
         lblEscolhaUmHospitalMedico.setBounds(483, 218, 269, 49);
         panel_1.add(lblEscolhaUmHospitalMedico);
 
-        final JComboBox boxHospitalMedico = new JComboBox();
+        boxHospitalMedico = new JComboBox<>();
         boxHospitalMedico.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println(boxHospitalMedico.getSelectedItem());
@@ -391,7 +392,7 @@ public class MenuCadastrar extends JFrame {
         panel_2.add(lblTipoHospital);
 
         String[] tiposHospital = { "...", "Primario", "Secundario", "Terciario" };
-        final JComboBox boxTipoHospital = new JComboBox(tiposHospital);
+        boxTipoHospital = new JComboBox<>(tiposHospital);
         boxTipoHospital.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println(boxTipoHospital.getSelectedItem());
@@ -433,10 +434,6 @@ public class MenuCadastrar extends JFrame {
                 }
             }
         });
-    }
-
-    public void setMenuDeCadastro(JFrame MenuDeCadastro) {
-        this.MenuDeCadastro = MenuDeCadastro;
     }
 
     public JTextField getFieldNome() {

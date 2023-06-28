@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.Random;
 
@@ -10,8 +10,16 @@ public class Convenio {
 
     // Convênio com código gerado de forma aleatória
     public Convenio(LocalDate dataValidade, String nome, double multiplicadorDesconto) {
+        ArquivosOperacao admin = new ArquivosOperacao();
         Random random = new Random();
-        this.codigo = random.nextInt(1000);
+        // Gera um código aleatório para o convênio, checa se já existe no CSV e gera outro caso exista
+        int codigo = random.nextInt(1000);
+        ArrayList<String> listaCodigoConvenio = admin.ler(new Convenio());
+        while (listaCodigoConvenio.contains(Integer.toString(codigo))) {
+            codigo = random.nextInt(1000);
+        }
+        this.codigo = codigo;
+
         this.nome = nome;
         this.dataValidade = dataValidade;
         this.multiplicadorDesconto = multiplicadorDesconto;
@@ -27,7 +35,10 @@ public class Convenio {
 
     // Construtor sem parâmetros para manipulação de arquivos
     public Convenio() {
-        this(LocalDate.now(), "teste", 0.9);
+        this.codigo = -1;
+        this.nome = "";
+        this.dataValidade = LocalDate.now();
+        this.multiplicadorDesconto = 0.1;
     }
 
     public int getCodigo() {

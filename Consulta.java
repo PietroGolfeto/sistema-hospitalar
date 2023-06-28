@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.Random;
 
@@ -11,15 +11,24 @@ public class Consulta {
     double valor;
 
     public Consulta(Paciente paciente, Medico medicoAtendimento, LocalDate data) {
+        ArquivosOperacao admin = new ArquivosOperacao();
+
         Random rand = new Random();
+        // Gera um id aleatorio para a consulta, checa se já existe no CSV e gera outro caso exista
+        int id = rand.nextInt(1000);
+        ArrayList<String> listaIdConsulta = admin.ler(new Consulta());
+        while (listaIdConsulta.contains(Integer.toString(id))) {
+            id = rand.nextInt(1000);
+        }
+        this.id = id;
+        
         this.paciente = paciente;
-        // Inicialmente nao ha um diagnostico, sendo necessario que o medico que possui
-        // acesso a consulta o gere
+        // Inicialmente nao ha um diagnostico, sendo necessario que o medico com
+        // acesso a essa consulta o gere
         valor = 200.0 * this.paciente.getConvenio().getMultiplicadorDesconto();
         this.diagnostico = null;
         this.medicoAtendimento = medicoAtendimento;
         this.data = data;
-        this.id = (int) (rand.nextFloat() * Math.pow(10, 6));
     }
 
     public Consulta() {

@@ -8,6 +8,7 @@ import javax.swing.JMenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.awt.EventQueue;
 
 public class MenuPrincipal extends JFrame {
     protected ArquivosOperacao admin = new ArquivosOperacao();
@@ -27,6 +28,7 @@ public class MenuPrincipal extends JFrame {
         JButton botaoListar = new JButton("Listar");
         JButton botaoCadastrar = new JButton("Cadastrar");
         JButton botaoSair = new JButton("Sair");
+        JButton botaoLogin = new JButton("Login");
 
         botaoSair.addActionListener(e -> {
             System.out.println("clicou em Sair");
@@ -65,15 +67,25 @@ public class MenuPrincipal extends JFrame {
             }
         });
 
+        botaoLogin.addActionListener(e -> {
+            System.out.println("Clicou Login");
+            try {
+                MenuLogin.getMenuLogin();
+            } catch (Exception k) {
+                System.err.println(k.getMessage());
+                System.exit(0);
+            }
+        });
+
         painel.add(botaoListar);
         painel.add(botaoCadastrar);
         painel.add(botaoSair);
+        painel.add(botaoLogin);
 
         add(painel);
 
         setSize(1920, 1080);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
     }
 
     private ActionListener submenuListarActionListener = new ActionListener() {
@@ -102,13 +114,10 @@ public class MenuPrincipal extends JFrame {
                 setTextoMenu(admin.ler(new Convenio()));
 
             } else {
-                System.out.println("clicou em Listar");
-                // TO DO
-                // Mensagem de erro
+                System.err.println("clicou em botao nao existente");
+
             }
 
-            // -----------------------------------------------------------------
-            // FUNCIONANDO
             // Atualiza o JTextArea do menu utilizando o StringBuilder
             int lastIndex = textoMenu.size() - 1;
             if (lastIndex >= 0) {
@@ -121,9 +130,21 @@ public class MenuPrincipal extends JFrame {
 
             // Vai para o final do JTextArea
             areaTexto.setCaretPosition(areaTexto.getDocument().getLength());
-            // -----------------------------------------------------------------
         }
     };
+
+    public static void getMenuPrincipal() {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    MenuPrincipal window = new MenuPrincipal();
+                    window.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
     public ArrayList<String> getTextoMenu() {
         return textoMenu;
